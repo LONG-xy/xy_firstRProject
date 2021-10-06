@@ -7,23 +7,108 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
 ```
 
-
+# 1.3
 ```{r}
 library(tidyverse)
 library(Stat2Data)
 data("Hawks")
+hawksSmall<-drop_na(select(Hawks,Age,Day,Month,Year,CaptureTime,Species,Wing,Weight,Tail))
+weight_hist<-ggplot(hawksSmall,aes(x=Weight))+
+            xlab("Weight(gm)")+
+            geom_histogram(binwidth=100)+
+            ylab("Count")
+
+weight_hist
+```
+
+# 1.4
+```{r}
+tail_density<-ggplot(hawksSmall,aes(x=Tail))+
+              geom_density()+
+              xlab("Tail(mm)")+
+              ylab("Density")
+tail_density 
+tail_density<-ggplot(hawksSmall,aes(x=Tail))+
+              geom_density(adjust=0.5)+
+              xlab("Tail(mm)")+
+              ylab("Density")
+tail_density
+tail_density<-ggplot(hawksSmall,aes(x=Tail))+
+              geom_density(adjust=1)+
+              xlab("Tail(mm)")+
+              ylab("Density")
+tail_density
+
+ggplot(data=(hawksSmall),aes(x=Tail,color=Species))+
+      xlab("Tail(mm)")+
+      geom_density()+
+      theme_bw()+
+      ylab("density")
+
+
+ggplot(hawksSmall,aes(x=Tail,color=Species,y=Species,fill=Species))+
+      geom_violin()+
+      theme_bw()+
+      xlab("Tail(mm)")+
+      ylab("Species")
+      
+```
+# 1.5
+aesthetics: Tail-horizontal position
+            weight-vertical position
+            Species-color
+glyph is point
+
+```{r}
+ggplot(hawksSmall,aes(x=Tail,y=Weight,color=Species,shape=Species))+
+      geom_point()+
+      theme_bw()+
+      xlab("Tail(mm)")+
+      ylab("Weight(mm")
+```
+
+# 1.6
+```{r}
+tail_weight_plot <- ggplot(hawksSmall,aes(x=Tail,y=Weight,color=Species))+
+      geom_point()+
+      geom_smooth(formula = y ~ x, method="lm")+
+      facet_wrap(~Species, scales = "free")+
+
+      geom_text(data=data.frame(Species = c("RT")),aes(x=210,y=1850,label="The heaviest hawks"))
+
+tail_weight_plot+geom_curve(data=data.frame(Species = c("RT")), aes(x=220,xend=209,y=1850,yend=2000),arrow = arrow(length = unit(0.5,"cm")),curvature = 0.1 )
+```
+
+# 2.1
+```{r}
+
+hSF<-Hawks%>%filter(Species=="RT"& Weight>=1000) %>% select(Wing,Weight,Tail)
+
+head(hSF)
+```
+# 2.2
+```{r}
+hSF<-hSF %>% arrange(Wing)
+
+head(hSF)
+```
+# 2.3
+
+```{r}
+species_code<-c("CH","RT","SS")
+species_name_full<-c("Cooper's","Red-tailed","Sharp-shinned")
+fullname_df<-data.frame(species_code,species_name_full)
+fullname_df<-fullname_df%>%rename(Species=species_code)
+hawksFullName<-Hawks%>%left_join(fullname_df)
+hawksFullName%>%select(-Species)%>%rename(Species=species_name_full)%>%select(Species,Wing,Weight)%>%head(7)
+```
+
+# 2.4
+```{r}
+
+Hawks%>%mutate(bird_BMI=1000*Weight/Wing**2)%>%select(Species,bird_BMI)%>%arrange(desc(bird_BMI))
 ```
 
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
