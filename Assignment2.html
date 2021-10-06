@@ -279,916 +279,928 @@ fullname_df&lt;-data.frame(species_code,species_name_full)
 fullname_df&lt;-fullname_df%&gt;%rename(Species=species_code)
 hawksFullName&lt;-Hawks%&gt;%left_join(fullname_df)</code></pre>
 <pre><code>## Joining, by = &quot;Species&quot;</code></pre>
-<pre class="r"><code>hawksFullName%&gt;%select(-Species)%&gt;%rename(Species=species_name_full)%&gt;%select(Species,Wing,Weight)</code></pre>
-<pre><code>##           Species  Wing Weight
-## 1      Red-tailed 385.0    920
-## 2      Red-tailed 376.0    930
-## 3      Red-tailed 381.0    990
-## 4        Cooper&#39;s 265.0    470
-## 5   Sharp-shinned 205.0    170
-## 6      Red-tailed 412.0   1090
-## 7      Red-tailed 370.0    960
-## 8      Red-tailed 375.0    855
-## 9      Red-tailed 412.0   1210
-## 10     Red-tailed 405.0   1120
-## 11     Red-tailed 393.0   1010
-## 12     Red-tailed 371.0   1010
-## 13     Red-tailed 390.0   1120
-## 14     Red-tailed 393.0     NA
-## 15     Red-tailed 416.0   1170
-## 16     Red-tailed 436.0   1390
-## 17     Red-tailed 418.0   1150
-## 18     Red-tailed 381.0    950
-## 19     Red-tailed 378.0    910
-## 20     Red-tailed 396.0   1010
-## 21     Red-tailed 399.0   1070
-## 22     Red-tailed 416.0   1190
-## 23     Red-tailed 415.0    101
-## 24     Red-tailed 392.0   1330
-## 25     Red-tailed 380.0    990
-## 26  Sharp-shinned 173.0    100
-## 27     Red-tailed 399.0   1100
-## 28     Red-tailed 401.0   1190
-## 29  Sharp-shinned 205.0    180
-## 30     Red-tailed 427.0   1490
-## 31     Red-tailed 395.0   1040
-## 32     Red-tailed 362.0    820
-## 33     Red-tailed 396.0   1030
-## 34     Red-tailed 391.0   1300
-## 35     Red-tailed 413.0   1500
-## 36     Red-tailed 371.0   1080
-## 37     Red-tailed 385.0   1320
-## 38     Red-tailed 378.0   1490
-## 39     Red-tailed 416.0   1500
-## 40  Sharp-shinned 193.0    100
-## 41  Sharp-shinned 171.0     88
-## 42       Cooper&#39;s 233.0    324
-## 43     Red-tailed 384.0   1060
-## 44     Red-tailed 382.0   1140
-## 45     Red-tailed 390.0   1030
-## 46     Red-tailed 390.0   1000
-## 47     Red-tailed 393.0   1050
-## 48     Red-tailed 378.0   1040
-## 49     Red-tailed 398.0   1110
-## 50     Red-tailed 412.0   1300
-## 51     Red-tailed 400.0    980
-## 52     Red-tailed 422.0   1120
-## 53  Sharp-shinned 202.0    134
-## 54     Red-tailed 394.0   1270
-## 55     Red-tailed 369.0    880
-## 56       Cooper&#39;s 252.0    340
-## 57       Cooper&#39;s 240.0    340
-## 58     Red-tailed 410.0   1255
-## 59     Red-tailed 241.0   1320
-## 60     Red-tailed 408.0   1320
-## 61     Red-tailed  37.2   1180
-## 62     Red-tailed 380.0    760
-## 63     Red-tailed 396.0   1250
-## 64     Red-tailed 326.0     NA
-## 65  Sharp-shinned 158.0    100
-## 66     Red-tailed 416.0   1300
-## 67       Cooper&#39;s 271.0    475
-## 68  Sharp-shinned 176.0    100
-## 69  Sharp-shinned 194.0     NA
-## 70     Red-tailed 390.0   1080
-## 71     Red-tailed 391.0   1130
-## 72     Red-tailed 387.0   1160
-## 73     Red-tailed 420.0   1345
-## 74     Red-tailed 435.0   1385
-## 75     Red-tailed 400.0   1210
-## 76     Red-tailed 398.0   1455
-## 77     Red-tailed 395.0   1180
-## 78     Red-tailed 410.0   1500
-## 79     Red-tailed 369.0   1025
-## 80     Red-tailed 372.0    930
-## 81     Red-tailed 415.0   1360
-## 82     Red-tailed 412.0   1255
-## 83  Sharp-shinned 205.0    194
-## 84  Sharp-shinned 204.0    159
-## 85  Sharp-shinned 170.0     90
-## 86       Cooper&#39;s 233.0    340
-## 87     Red-tailed 375.0   1065
-## 88     Red-tailed 385.0   1125
-## 89     Red-tailed 422.0   1340
-## 90     Red-tailed 391.0   1050
-## 91     Red-tailed 410.0   1210
-## 92     Red-tailed 385.0    980
-## 93     Red-tailed 381.0   1000
-## 94     Red-tailed 416.0   1390
-## 95     Red-tailed 406.0   1275
-## 96     Red-tailed 418.0   1180
-## 97     Red-tailed 412.0   1210
-## 98  Sharp-shinned 208.0    168
-## 99  Sharp-shinned 208.0    146
-## 100 Sharp-shinned 175.0    108
-## 101 Sharp-shinned 166.0     94
-## 102    Red-tailed 405.0   1085
-## 103 Sharp-shinned 198.0    188
-## 104 Sharp-shinned 200.0    154
-## 105    Red-tailed 380.0    810
-## 106    Red-tailed 381.0    905
-## 107 Sharp-shinned 169.0     94
-## 108      Cooper&#39;s 260.0    420
-## 109    Red-tailed 428.0   1240
-## 110    Red-tailed 400.0    990
-## 111      Cooper&#39;s 265.0    365
-## 112 Sharp-shinned 177.0     91
-## 113    Red-tailed 381.0   1010
-## 114    Red-tailed 403.0    980
-## 115    Red-tailed 382.0    860
-## 116    Red-tailed 382.0    970
-## 117    Red-tailed 399.0    980
-## 118    Red-tailed 380.0    985
-## 119    Red-tailed 375.0    990
-## 120    Red-tailed 420.0   1210
-## 121 Sharp-shinned 170.0     89
-## 122 Sharp-shinned 177.0     97
-## 123    Red-tailed 375.0    990
-## 124    Red-tailed 395.0   1170
-## 125 Sharp-shinned 170.0     93
-## 126    Red-tailed 406.0   1350
-## 127    Red-tailed 414.0   1370
-## 128 Sharp-shinned 173.0    103
-## 129 Sharp-shinned 209.0    151
-## 130 Sharp-shinned 177.0    101
-## 131    Red-tailed 388.0    985
-## 132    Red-tailed 277.0    940
-## 133    Red-tailed 423.0   1310
-## 134    Red-tailed 365.0   1035
-## 135    Red-tailed 383.0    965
-## 136    Red-tailed 391.0   1125
-## 137    Red-tailed 389.0    975
-## 138    Red-tailed 392.0   1140
-## 139    Red-tailed 375.0    950
-## 140    Red-tailed 410.0   1210
-## 141 Sharp-shinned 179.0     95
-## 142 Sharp-shinned 172.0     89
-## 143 Sharp-shinned 202.0    195
-## 144 Sharp-shinned 174.0     93
-## 145    Red-tailed 422.0   1205
-## 146    Red-tailed 385.0   1045
-## 147    Red-tailed 363.0   1090
-## 148    Red-tailed 450.0   1190
-## 149    Red-tailed 380.0    960
-## 150    Red-tailed 385.0    955
-## 151    Red-tailed 385.0   1110
-## 152 Sharp-shinned 171.0    100
-## 153    Red-tailed 380.0    900
-## 154    Red-tailed 384.0   1075
-## 155    Red-tailed 373.0    980
-## 156    Red-tailed 381.0    940
-## 157    Red-tailed 363.0   1070
-## 158    Red-tailed 409.0   1120
-## 159    Red-tailed 390.0   1060
-## 160 Sharp-shinned 204.0    168
-## 161 Sharp-shinned 197.0    211
-## 162    Red-tailed 420.0   1125
-## 163    Red-tailed 381.0   1100
-## 164    Red-tailed 408.0   1360
-## 165    Red-tailed 388.0    995
-## 166    Red-tailed 398.0   1095
-## 167 Sharp-shinned 209.0    196
-## 168 Sharp-shinned 209.0    176
-## 169    Red-tailed 394.0   1075
-## 170 Sharp-shinned 204.0    180
-## 171 Sharp-shinned 204.0    164
-## 172 Sharp-shinned 209.0    158
-## 173    Red-tailed 394.0   1140
-## 174    Red-tailed 416.0   1240
-## 175    Red-tailed 445.0   1465
-## 176 Sharp-shinned 209.0    169
-## 177    Red-tailed 388.0   1105
-## 178    Red-tailed 397.0   1010
-## 179    Red-tailed 384.0   1075
-## 180    Red-tailed 379.0   1060
-## 181    Red-tailed 393.0   1015
-## 182    Red-tailed 386.0   1100
-## 183    Red-tailed 397.0   1010
-## 184    Red-tailed 382.0   1000
-## 185    Red-tailed 386.0    980
-## 186    Red-tailed 417.0   1240
-## 187    Red-tailed 403.0   1360
-## 188      Cooper&#39;s 239.0    183
-## 189    Red-tailed 401.0   1405
-## 190    Red-tailed 377.0   1055
-## 191    Red-tailed 432.0   1670
-## 192    Red-tailed 390.0   1250
-## 193    Red-tailed 381.0   1030
-## 194    Red-tailed 403.0   1040
-## 195 Sharp-shinned 213.0    190
-## 196 Sharp-shinned 172.0    105
-## 197    Red-tailed 390.0   1090
-## 198 Sharp-shinned 204.0    190
-## 199    Red-tailed 386.0   1050
-## 200    Red-tailed 402.0   1110
-## 201 Sharp-shinned 201.0    206
-## 202 Sharp-shinned 202.0    195
-## 203    Red-tailed 374.0   1010
-## 204    Red-tailed 358.0    880
-## 205    Red-tailed 370.0   1060
-## 206    Red-tailed 390.0    920
-## 207    Red-tailed 398.0   1195
-## 208    Red-tailed 360.0    890
-## 209    Red-tailed 355.0    900
-## 210    Red-tailed 375.0   1110
-## 211 Sharp-shinned 200.0    160
-## 212 Sharp-shinned 179.0    105
-## 213 Sharp-shinned 175.0     99
-## 214 Sharp-shinned 203.0    165
-## 215 Sharp-shinned 205.0    100
-## 216 Sharp-shinned 213.0    125
-## 217    Red-tailed 409.0   1100
-## 218 Sharp-shinned 202.0     NA
-## 219 Sharp-shinned 195.0    155
-## 220    Red-tailed 415.0   1285
-## 221      Cooper&#39;s 236.0    390
-## 222    Red-tailed 363.0    920
-## 223    Red-tailed 381.0   1025
-## 224    Red-tailed 350.0    940
-## 225    Red-tailed 398.0   1240
-## 226    Red-tailed 412.0   1160
-## 227 Sharp-shinned 203.0    150
-## 228 Sharp-shinned 201.0    130
-## 229    Red-tailed 411.0   1240
-## 230    Red-tailed 373.0    930
-## 231 Sharp-shinned 178.0     90
-## 232    Red-tailed 415.0   1240
-## 233    Red-tailed 383.0   1030
-## 234      Cooper&#39;s 223.0    550
-## 235    Red-tailed 390.0   1250
-## 236    Red-tailed 390.0    999
-## 237    Red-tailed 365.0   1120
-## 238    Red-tailed 345.0   1000
-## 239      Cooper&#39;s 273.0    530
-## 240    Red-tailed 400.0   1040
-## 241    Red-tailed 380.0   1150
-## 242    Red-tailed 330.0   1000
-## 243    Red-tailed 410.0   1360
-## 244    Red-tailed 313.0    930
-## 245    Red-tailed 384.0    980
-## 246    Red-tailed 409.0   1260
-## 247    Red-tailed 390.0    900
-## 248    Red-tailed 411.0   1300
-## 249      Cooper&#39;s 259.0    470
-## 250    Red-tailed 380.0   1040
-## 251    Red-tailed 370.0    950
-## 252    Red-tailed 415.0   1320
-## 253 Sharp-shinned 215.0    180
-## 254    Red-tailed 410.0   1280
-## 255    Red-tailed 412.0   1310
-## 256    Red-tailed 384.0    910
-## 257    Red-tailed 404.0   1220
-## 258    Red-tailed 375.0    920
-## 259    Red-tailed 410.0   1135
-## 260    Red-tailed 384.0    940
-## 261    Red-tailed 385.0    920
-## 262    Red-tailed 398.0   1280
-## 263      Cooper&#39;s    NA    480
-## 264    Red-tailed 425.0   1220
-## 265    Red-tailed 401.0   1000
-## 266    Red-tailed 387.0   1120
-## 267    Red-tailed 376.0    925
-## 268 Sharp-shinned 171.0     90
-## 269    Red-tailed 420.0   1280
-## 270    Red-tailed 385.0    985
-## 271    Red-tailed 405.0   1350
-## 272    Red-tailed 350.0    730
-## 273    Red-tailed 388.0    890
-## 274    Red-tailed 398.0   1020
-## 275    Red-tailed 410.0   1000
-## 276 Sharp-shinned 202.0    150
-## 277 Sharp-shinned 204.0    180
-## 278    Red-tailed 382.0   1020
-## 279    Red-tailed 111.0   1340
-## 280    Red-tailed 396.0   1300
-## 281    Red-tailed 363.0   1015
-## 282    Red-tailed 360.0    900
-## 283    Red-tailed 390.0   1000
-## 284 Sharp-shinned 195.0    150
-## 285    Red-tailed 390.0   1050
-## 286    Red-tailed 380.0    950
-## 287      Cooper&#39;s 225.0    350
-## 288      Cooper&#39;s 247.0    375
-## 289    Red-tailed 415.0   1175
-## 290    Red-tailed 354.0    980
-## 291    Red-tailed 417.0   1260
-## 292    Red-tailed 379.0   1050
-## 293    Red-tailed 412.0   1330
-## 294    Red-tailed 377.0    980
-## 295    Red-tailed 372.0    920
-## 296    Red-tailed 420.0   1540
-## 297    Red-tailed 368.0   1060
-## 298    Red-tailed 406.0   1420
-## 299      Cooper&#39;s 225.0    400
-## 300    Red-tailed 392.0   1142
-## 301 Sharp-shinned 191.0    157
-## 302 Sharp-shinned 161.0     98
-## 303    Red-tailed 365.0    813
-## 304 Sharp-shinned 156.0     94
-## 305 Sharp-shinned 191.0    155
-## 306 Sharp-shinned 198.0    181
-## 307 Sharp-shinned 160.0     92
-## 308 Sharp-shinned 164.0     98
-## 309    Red-tailed 352.0   1024
-## 310      Cooper&#39;s 265.0    464
-## 311 Sharp-shinned 163.0    100
-## 312 Sharp-shinned 193.0    186
-## 313 Sharp-shinned 190.0    164
-## 314 Sharp-shinned 165.0     98
-## 315 Sharp-shinned 162.0     NA
-## 316 Sharp-shinned 198.0    158
-## 317    Red-tailed 370.0   1023
-## 318    Red-tailed 230.0    340
-## 319      Cooper&#39;s 194.0    163
-## 320 Sharp-shinned 157.0     92
-## 321 Sharp-shinned 260.0    550
-## 322      Cooper&#39;s 377.0   1119
-## 323    Red-tailed 364.0    917
-## 324    Red-tailed 367.0    946
-## 325    Red-tailed 233.0    337
-## 326      Cooper&#39;s 336.0    742
-## 327 Sharp-shinned 259.0    439
-## 328      Cooper&#39;s 199.0    187
-## 329 Sharp-shinned 165.0     92
-## 330 Sharp-shinned 370.0   1094
-## 331    Red-tailed 362.0    832
-## 332    Red-tailed 368.0   1244
-## 333    Red-tailed 368.0   1244
-## 334    Red-tailed 367.0    974
-## 335    Red-tailed 400.0   1289
-## 336    Red-tailed 379.0    999
-## 337    Red-tailed 360.0    994
-## 338    Red-tailed 362.0   1004
-## 339    Red-tailed 378.0   1097
-## 340 Sharp-shinned 201.0    185
-## 341 Sharp-shinned 193.0    181
-## 342    Red-tailed 372.0   1092
-## 343    Red-tailed 369.0   1049
-## 344    Red-tailed 354.0    998
-## 345    Red-tailed 367.0   1091
-## 346    Red-tailed 349.0    987
-## 347    Red-tailed 375.0   1151
-## 348    Red-tailed 343.0    971
-## 349    Red-tailed 360.0   1159
-## 350    Red-tailed 395.0   1239
-## 351    Red-tailed 400.0   1216
-## 352 Sharp-shinned 170.0    177
-## 353      Cooper&#39;s 268.0    469
-## 354    Red-tailed 369.0   1039
-## 355    Red-tailed 365.0   1079
-## 356    Red-tailed 375.0   1159
-## 357 Sharp-shinned 230.0    162
-## 358      Cooper&#39;s 213.0    339
-## 359    Red-tailed 382.0   1403
-## 360 Sharp-shinned 168.0    175
-## 361    Red-tailed 478.0   1473
-## 362    Red-tailed 469.0   1001
-## 363 Sharp-shinned 172.0     98
-## 364    Red-tailed 373.0    914
-## 365    Red-tailed 386.0   1059
-## 366    Red-tailed 384.0   1147
-## 367    Red-tailed 351.0    949
-## 368 Sharp-shinned 168.0    102
-## 369    Red-tailed 363.0    973
-## 370 Sharp-shinned 199.0    196
-## 371      Cooper&#39;s 235.0    327
-## 372    Red-tailed 374.0   1064
-## 373    Red-tailed 369.0    749
-## 374 Sharp-shinned 202.0    201
-## 375 Sharp-shinned 202.0    180
-## 376    Red-tailed 374.0   1213
-## 377    Red-tailed 389.0   1200
-## 378    Red-tailed 379.0   1040
-## 379 Sharp-shinned 170.0    113
-## 380    Red-tailed 373.0    919
-## 381    Red-tailed 403.0   1487
-## 382    Red-tailed 400.0   1254
-## 383 Sharp-shinned 205.0    156
-## 384    Red-tailed 405.0   1189
-## 385    Red-tailed 382.0    979
-## 386 Sharp-shinned 165.0     96
-## 387    Red-tailed 407.0   1339
-## 388    Red-tailed 403.0   1199
-## 389    Red-tailed 406.0   1344
-## 390    Red-tailed 381.0    969
-## 391    Red-tailed 395.0   1039
-## 392    Red-tailed 410.0   1054
-## 393      Cooper&#39;s 243.0    334
-## 394 Sharp-shinned 170.0    101
-## 395 Sharp-shinned 210.0    181
-## 396    Red-tailed 425.0   1449
-## 397    Red-tailed 402.0    985
-## 398    Red-tailed 480.0   1598
-## 399    Red-tailed 412.0    992
-## 400      Cooper&#39;s 260.0    569
-## 401    Red-tailed 381.0   1354
-## 402    Red-tailed 392.0    969
-## 403    Red-tailed 382.0   1080
-## 404 Sharp-shinned 196.0    185
-## 405    Red-tailed 391.0   1097
-## 406    Red-tailed 397.0   1439
-## 407    Red-tailed 361.0     NA
-## 408    Red-tailed 376.0   1019
-## 409    Red-tailed 410.0   1239
-## 410    Red-tailed 381.0   1399
-## 411    Red-tailed 396.0   1169
-## 412    Red-tailed 383.0   1164
-## 413 Sharp-shinned 203.0    176
-## 414    Red-tailed 271.0     NA
-## 415      Cooper&#39;s 255.0    429
-## 416 Sharp-shinned 196.0    160
-## 417 Sharp-shinned 168.0    105
-## 418    Red-tailed 392.0    890
-## 419 Sharp-shinned 163.0    100
-## 420 Sharp-shinned 205.0     NA
-## 421    Red-tailed 395.0   1215
-## 422 Sharp-shinned 163.0    100
-## 423    Red-tailed 370.0   1030
-## 424      Cooper&#39;s 225.0    340
-## 425 Sharp-shinned 197.0    165
-## 426    Red-tailed 376.0    985
-## 427    Red-tailed 372.0    975
-## 428    Red-tailed 391.0   1165
-## 429 Sharp-shinned 165.0     95
-## 430    Red-tailed 364.0   1044
-## 431 Sharp-shinned 202.0    180
-## 432 Sharp-shinned 163.0    125
-## 433    Red-tailed 381.0   1080
-## 434    Red-tailed 375.0    890
-## 435    Red-tailed 392.0   1105
-## 436    Red-tailed 398.0   1310
-## 437    Red-tailed 371.0    895
-## 438    Red-tailed 367.0   1060
-## 439 Sharp-shinned 193.0    165
-## 440    Red-tailed 375.0    960
-## 441    Red-tailed 408.0   1270
-## 442      Cooper&#39;s 252.0    540
-## 443      Cooper&#39;s 237.0    365
-## 444    Red-tailed 399.0   1170
-## 445      Cooper&#39;s 268.0    590
-## 446    Red-tailed 388.0   1225
-## 447 Sharp-shinned 200.0    175
-## 448 Sharp-shinned 192.0    170
-## 449 Sharp-shinned 167.0    100
-## 450    Red-tailed 370.0   1060
-## 451 Sharp-shinned 162.0    110
-## 452    Red-tailed 363.0    850
-## 453    Red-tailed 371.0   1145
-## 454 Sharp-shinned 199.0    165
-## 455    Red-tailed 386.0   1090
-## 456    Red-tailed 400.0   1345
-## 457    Red-tailed 390.0   1050
-## 458 Sharp-shinned 199.0    200
-## 459      Cooper&#39;s 254.0    505
-## 460    Red-tailed 382.0   1040
-## 461 Sharp-shinned 196.0    155
-## 462    Red-tailed 354.0    965
-## 463    Red-tailed 403.0   1105
-## 464 Sharp-shinned 194.0    155
-## 465    Red-tailed 375.0   1045
-## 466    Red-tailed 369.0    900
-## 467    Red-tailed 368.0   1015
-## 468    Red-tailed 393.0   1385
-## 469    Red-tailed 370.0   1165
-## 470    Red-tailed 378.0    905
-## 471    Red-tailed 369.0    985
-## 472    Red-tailed 364.0    800
-## 473    Red-tailed 387.0    995
-## 474    Red-tailed 410.0   1460
-## 475 Sharp-shinned 194.0    165
-## 476    Red-tailed 410.0   1585
-## 477 Sharp-shinned 194.0    185
-## 478    Red-tailed 373.0    920
-## 479    Red-tailed 390.0   1460
-## 480    Red-tailed 404.0   1315
-## 481    Red-tailed 375.0   1019
-## 482    Red-tailed 395.0   1215
-## 483    Red-tailed 379.0   1005
-## 484    Red-tailed 382.0   1350
-## 485    Red-tailed 404.0   1145
-## 486 Sharp-shinned 205.0    175
-## 487    Red-tailed 377.0   1010
-## 488 Sharp-shinned 184.0    155
-## 489    Red-tailed 390.0   1120
-## 490    Red-tailed 404.0    280
-## 491    Red-tailed 351.0    775
-## 492    Red-tailed 394.0   1210
-## 493 Sharp-shinned 175.0    107
-## 494    Red-tailed 372.0    909
-## 495 Sharp-shinned 169.0     95
-## 496    Red-tailed 376.0   1145
-## 497    Red-tailed 399.0   1150
-## 498    Red-tailed 399.0   1560
-## 499    Red-tailed 357.0    940
-## 500 Sharp-shinned 195.0    145
-## 501    Red-tailed 400.0   1089
-## 502    Red-tailed 382.0   1194
-## 503 Sharp-shinned 161.0     95
-## 504    Red-tailed 390.0   1015
-## 505    Red-tailed 379.0    975
-## 506    Red-tailed 376.0   1035
-## 507    Red-tailed 331.0   1055
-## 508    Red-tailed 371.0    945
-## 509 Sharp-shinned 160.0     90
-## 510    Red-tailed 361.0    785
-## 511      Cooper&#39;s 268.0     56
-## 512    Red-tailed 394.0   1220
-## 513 Sharp-shinned 191.0    175
-## 514    Red-tailed 358.0   1025
-## 515    Red-tailed 380.0   1000
-## 516 Sharp-shinned 188.0    175
-## 517    Red-tailed 397.0   1210
-## 518 Sharp-shinned 196.0    180
-## 519 Sharp-shinned 190.0    175
-## 520 Sharp-shinned 161.0     90
-## 521      Cooper&#39;s 145.0    320
-## 522    Red-tailed 392.0   1185
-## 523 Sharp-shinned 190.0     NA
-## 524      Cooper&#39;s 230.0    350
-## 525    Red-tailed 406.0     NA
-## 526    Red-tailed 363.0    950
-## 527 Sharp-shinned 162.0     85
-## 528    Red-tailed 374.0    895
-## 529    Red-tailed 412.0   1150
-## 530      Cooper&#39;s 272.0    565
-## 531    Red-tailed 388.0    950
-## 532    Red-tailed 371.0    990
-## 533      Cooper&#39;s 225.0    325
-## 534    Red-tailed 391.0   1120
-## 535 Sharp-shinned 163.0     90
-## 536    Red-tailed 410.0   1120
-## 537    Red-tailed 368.0    820
-## 538    Red-tailed 410.0   1200
-## 539    Red-tailed 425.0   1120
-## 540    Red-tailed 368.0   1120
-## 541    Red-tailed 392.0   1220
-## 542 Sharp-shinned 250.0    470
-## 543    Red-tailed 418.0   1310
-## 544    Red-tailed 370.0    920
-## 545 Sharp-shinned 170.0    100
-## 546 Sharp-shinned 203.0    180
-## 547    Red-tailed 370.0    955
-## 548    Red-tailed 408.0   1225
-## 549    Red-tailed 393.0   1400
-## 550    Red-tailed 365.0   1025
-## 551    Red-tailed 405.0   1140
-## 552    Red-tailed 381.0   1080
-## 553    Red-tailed 390.0   1135
-## 554    Red-tailed 384.0   1430
-## 555    Red-tailed 390.0   1050
-## 556    Red-tailed 381.0    920
-## 557 Sharp-shinned 194.0    175
-## 558    Red-tailed 371.0    905
-## 559    Red-tailed 356.0    915
-## 560    Red-tailed 377.0    910
-## 561    Red-tailed 362.0    950
-## 562 Sharp-shinned 165.0    105
-## 563 Sharp-shinned 155.0    100
-## 564    Red-tailed 400.0   1225
-## 565 Sharp-shinned 161.0    105
-## 566    Red-tailed 387.0   1090
-## 567    Red-tailed 409.0   1350
-## 568 Sharp-shinned 195.0    200
-## 569 Sharp-shinned 196.0    200
-## 570 Sharp-shinned 169.0    100
-## 571    Red-tailed 385.0    940
-## 572    Red-tailed 377.0    920
-## 573    Red-tailed 400.0   1190
-## 574 Sharp-shinned 164.0     90
-## 575 Sharp-shinned 165.0     95
-## 576    Red-tailed 363.0    915
-## 577      Cooper&#39;s 266.0    535
-## 578    Red-tailed 403.0   1310
-## 579    Red-tailed 375.0    950
-## 580 Sharp-shinned 166.0    120
-## 581    Red-tailed 373.0    975
-## 582    Red-tailed 373.0    990
-## 583 Sharp-shinned 170.0    110
-## 584    Red-tailed 373.0   1270
-## 585    Red-tailed 354.0    960
-## 586    Red-tailed 394.0   1290
-## 587 Sharp-shinned 165.0     95
-## 588      Cooper&#39;s 261.0    505
-## 589    Red-tailed 377.0   1045
-## 590    Red-tailed 364.0   1090
-## 591    Red-tailed 385.0   1180
-## 592    Red-tailed 390.0   1195
-## 593    Red-tailed 383.0   1055
-## 594    Red-tailed 365.0   1025
-## 595 Sharp-shinned 201.0    175
-## 596    Red-tailed 376.0    940
-## 597    Red-tailed 402.0   1335
-## 598    Red-tailed 394.0   1085
-## 599      Cooper&#39;s 223.0    375
-## 600    Red-tailed 378.0   1090
-## 601    Red-tailed 369.0    995
-## 602    Red-tailed 378.0   1090
-## 603    Red-tailed 262.0   1020
-## 604 Sharp-shinned 165.0    100
-## 605    Red-tailed 379.0   1000
-## 606    Red-tailed 380.0   1085
-## 607    Red-tailed 380.0   1045
-## 608    Red-tailed 393.0   1060
-## 609    Red-tailed 389.0   1135
-## 610    Red-tailed 395.0   1210
-## 611 Sharp-shinned 207.0    185
-## 612    Red-tailed 367.0    965
-## 613    Red-tailed 368.0    905
-## 614    Red-tailed 377.0   1125
-## 615    Red-tailed 374.0    950
-## 616    Red-tailed 385.0   1195
-## 617    Red-tailed 363.0   1005
-## 618 Sharp-shinned 164.0     95
-## 619 Sharp-shinned 199.0    175
-## 620    Red-tailed 378.0    995
-## 621 Sharp-shinned 200.0    165
-## 622    Red-tailed 405.0   1170
-## 623 Sharp-shinned 194.0    145
-## 624 Sharp-shinned 190.0    175
-## 625 Sharp-shinned 195.0    170
-## 626 Sharp-shinned 161.0    105
-## 627 Sharp-shinned 168.0     95
-## 628 Sharp-shinned 160.0     95
-## 629    Red-tailed 392.0   1085
-## 630 Sharp-shinned 201.0    165
-## 631    Red-tailed 395.0   1115
-## 632    Red-tailed 390.0   1195
-## 633 Sharp-shinned 161.0    100
-## 634      Cooper&#39;s 230.0    365
-## 635 Sharp-shinned 192.0    170
-## 636 Sharp-shinned 156.0     90
-## 637 Sharp-shinned 158.0     95
-## 638 Sharp-shinned 167.0    115
-## 639 Sharp-shinned 199.0    155
-## 640      Cooper&#39;s 320.0    229
-## 641    Red-tailed 389.0   1165
-## 642      Cooper&#39;s 227.0    155
-## 643      Cooper&#39;s 230.0    340
-## 644 Sharp-shinned 199.0    180
-## 645    Red-tailed 378.0    235
-## 646 Sharp-shinned 164.0    105
-## 647    Red-tailed 385.0   1085
-## 648    Red-tailed 369.0    970
-## 649    Red-tailed 378.0   1030
-## 650    Red-tailed 373.0   1015
-## 651    Red-tailed 419.0   1030
-## 652    Red-tailed 414.0   1215
-## 653 Sharp-shinned 203.0    185
-## 654 Sharp-shinned 162.0     95
-## 655 Sharp-shinned 165.0     95
-## 656 Sharp-shinned 161.0     95
-## 657 Sharp-shinned 161.0    110
-## 658    Red-tailed 404.0   1170
-## 659 Sharp-shinned 165.0    105
-## 660 Sharp-shinned 199.0    175
-## 661 Sharp-shinned 171.0     95
-## 662 Sharp-shinned 213.0    190
-## 663 Sharp-shinned 169.0    105
-## 664    Red-tailed 379.0   1435
-## 665    Red-tailed 407.0   1235
-## 666    Red-tailed 376.0   1055
-## 667    Red-tailed 380.0   1105
-## 668 Sharp-shinned 172.0    120
-## 669    Red-tailed 408.0   1390
-## 670 Sharp-shinned 167.0    105
-## 671    Red-tailed 374.0   1080
-## 672    Red-tailed 376.0    910
-## 673      Cooper&#39;s 258.0    490
-## 674    Red-tailed 370.0    845
-## 675 Sharp-shinned 202.0    175
-## 676    Red-tailed 363.0    865
-## 677 Sharp-shinned 200.0    180
-## 678    Red-tailed 372.0   2030
-## 679    Red-tailed 378.0    960
-## 680      Cooper&#39;s 254.0    515
-## 681    Red-tailed 361.0    970
-## 682    Red-tailed 389.0   1265
-## 683    Red-tailed 404.0   1300
-## 684 Sharp-shinned 195.0    170
-## 685 Sharp-shinned 203.0    191
-## 686      Cooper&#39;s 253.0    540
-## 687 Sharp-shinned 199.0    185
-## 688 Sharp-shinned 194.0    165
-## 689 Sharp-shinned 196.0    205
-## 690 Sharp-shinned 168.0     95
-## 691    Red-tailed 395.0   1170
-## 692    Red-tailed 368.0   1075
-## 693 Sharp-shinned 210.0    200
-## 694    Red-tailed 401.0    965
-## 695    Red-tailed 355.0    785
-## 696    Red-tailed 377.0   1095
-## 697 Sharp-shinned 197.0    160
-## 698 Sharp-shinned 171.0     95
-## 699    Red-tailed 277.0   1500
-## 700    Red-tailed 435.0   1595
-## 701    Red-tailed 372.0    985
-## 702      Cooper&#39;s 260.0    565
-## 703    Red-tailed 390.0    240
-## 704    Red-tailed 359.0    875
-## 705    Red-tailed 393.0   1225
-## 706    Red-tailed 402.0   1255
-## 707    Red-tailed 362.0    950
-## 708      Cooper&#39;s 227.0    330
-## 709    Red-tailed 359.0    895
-## 710 Sharp-shinned 155.0    100
-## 711      Cooper&#39;s 261.0    455
-## 712 Sharp-shinned 160.0     90
-## 713 Sharp-shinned 166.0    105
-## 714    Red-tailed 362.0   1305
-## 715    Red-tailed 375.0    975
-## 716    Red-tailed 388.0   1185
-## 717    Red-tailed 392.0   1030
-## 718    Red-tailed 412.0   1215
-## 719    Red-tailed 371.0   1075
-## 720      Cooper&#39;s 255.0    960
-## 721    Red-tailed 391.0    795
-## 722 Sharp-shinned 190.0    180
-## 723    Red-tailed 385.0   1225
-## 724 Sharp-shinned 166.0    110
-## 725 Sharp-shinned 197.0    165
-## 726    Red-tailed 370.0    920
-## 727 Sharp-shinned 190.0    170
-## 728    Red-tailed 400.0   1315
-## 729 Sharp-shinned 162.0    100
-## 730 Sharp-shinned 194.0    155
-## 731    Red-tailed 395.0   1155
-## 732    Red-tailed 403.0   1160
-## 733    Red-tailed 386.0    955
-## 734 Sharp-shinned 193.0    190
-## 735 Sharp-shinned 203.0    180
-## 736 Sharp-shinned 159.0     90
-## 737 Sharp-shinned 163.0    100
-## 738 Sharp-shinned 191.0    190
-## 739 Sharp-shinned 166.0    105
-## 740    Red-tailed 361.0   1030
-## 741      Cooper&#39;s 260.0    565
-## 742      Cooper&#39;s 234.0    380
-## 743    Red-tailed 377.0   1040
-## 744    Red-tailed 361.0    910
-## 745    Red-tailed 375.0   1005
-## 746 Sharp-shinned 193.0    180
-## 747 Sharp-shinned 196.0    175
-## 748 Sharp-shinned 159.0    105
-## 749 Sharp-shinned 192.0    190
-## 750    Red-tailed 401.0   1250
-## 751 Sharp-shinned 198.0    185
-## 752    Red-tailed 407.0   1275
-## 753 Sharp-shinned 162.0    105
-## 754      Cooper&#39;s 169.0    640
-## 755 Sharp-shinned 168.0    100
-## 756 Sharp-shinned 168.0    105
-## 757      Cooper&#39;s 223.0    390
-## 758    Red-tailed 375.0   1030
-## 759    Red-tailed 406.0   1290
-## 760    Red-tailed 386.0   1020
-## 761 Sharp-shinned 160.0    105
-## 762    Red-tailed 378.0   1055
-## 763 Sharp-shinned 193.0    185
-## 764    Red-tailed 379.0   1010
-## 765    Red-tailed 364.0   1015
-## 766    Red-tailed 350.0   1115
-## 767    Red-tailed 380.0   1320
-## 768    Red-tailed 395.0   1180
-## 769    Red-tailed 372.0   1145
-## 770    Red-tailed 376.0    995
-## 771    Red-tailed 367.0   1045
-## 772      Cooper&#39;s 230.0    340
-## 773    Red-tailed 366.0    935
-## 774    Red-tailed 386.0   1065
-## 775    Red-tailed 375.0   1110
-## 776 Sharp-shinned 199.0    190
-## 777    Red-tailed 405.0   1255
-## 778    Red-tailed 371.0   1015
-## 779 Sharp-shinned 193.0    190
-## 780    Red-tailed 350.0    960
-## 781 Sharp-shinned 193.0    200
-## 782    Red-tailed 368.0   1090
-## 783 Sharp-shinned 185.0    170
-## 784    Red-tailed 372.0   1085
-## 785    Red-tailed 396.0   1065
-## 786    Red-tailed 365.0   1125
-## 787    Red-tailed 374.0   1050
-## 788      Cooper&#39;s 253.0    525
-## 789    Red-tailed 372.0    980
-## 790    Red-tailed 376.0   1180
-## 791 Sharp-shinned 166.0    115
-## 792    Red-tailed 369.0   1095
-## 793    Red-tailed 391.0   1330
-## 794 Sharp-shinned 193.0    185
-## 795    Red-tailed 397.0   1100
-## 796    Red-tailed 366.0   1115
-## 797    Red-tailed 385.0   1400
-## 798    Red-tailed 400.0   1175
-## 799 Sharp-shinned 198.0    185
-## 800    Red-tailed 365.0    970
-## 801 Sharp-shinned 194.0    170
-## 802 Sharp-shinned 195.0    175
-## 803 Sharp-shinned 200.0    165
-## 804    Red-tailed 384.0   1260
-## 805 Sharp-shinned 159.0    110
-## 806 Sharp-shinned 161.0    100
-## 807 Sharp-shinned 191.0    190
-## 808      Cooper&#39;s 216.0    305
-## 809      Cooper&#39;s 256.0    510
-## 810 Sharp-shinned 161.0     90
-## 811    Red-tailed 396.0   1195
-## 812    Red-tailed 391.0   1035
-## 813 Sharp-shinned 160.0     90
-## 814 Sharp-shinned 183.0    160
-## 815 Sharp-shinned 156.0     85
-## 816    Red-tailed 393.0   1155
-## 817    Red-tailed 397.0   1260
-## 818 Sharp-shinned 159.0     95
-## 819      Cooper&#39;s 255.0    440
-## 820 Sharp-shinned 197.0    175
-## 821      Cooper&#39;s 218.0    295
-## 822 Sharp-shinned 196.0    160
-## 823    Red-tailed 384.0   1010
-## 824    Red-tailed 385.0    990
-## 825 Sharp-shinned 181.0    150
-## 826      Cooper&#39;s 225.0    300
-## 827    Red-tailed 379.0    945
-## 828 Sharp-shinned 201.0    188
-## 829 Sharp-shinned 161.0     95
-## 830      Cooper&#39;s 230.0    330
-## 831 Sharp-shinned 159.0     95
-## 832    Red-tailed 367.0    970
-## 833    Red-tailed 396.0   1240
-## 834 Sharp-shinned 157.0    105
-## 835 Sharp-shinned 191.0    165
-## 836 Sharp-shinned 191.0    170
-## 837 Sharp-shinned 168.0    100
-## 838    Red-tailed 428.0   1290
-## 839      Cooper&#39;s 252.0    470
-## 840 Sharp-shinned 192.0    175
-## 841 Sharp-shinned 195.0    195
-## 842      Cooper&#39;s 233.0    335
-## 843    Red-tailed 364.0   1150
-## 844    Red-tailed 370.0    960
-## 845    Red-tailed 400.0   1130
-## 846    Red-tailed 375.0    925
-## 847    Red-tailed 398.0   1205
-## 848    Red-tailed 385.0   1040
-## 849 Sharp-shinned 156.0    100
-## 850      Cooper&#39;s 230.0    335
-## 851      Cooper&#39;s 220.0    335
-## 852 Sharp-shinned 163.0    105
-## 853    Red-tailed 376.0    860
-## 854    Red-tailed 360.0    935
-## 855    Red-tailed 372.0   1010
-## 856    Red-tailed 400.0   1285
-## 857 Sharp-shinned 194.0    210
-## 858    Red-tailed 370.0    830
-## 859 Sharp-shinned 160.0     95
-## 860    Red-tailed 403.0   1350
-## 861    Red-tailed 375.0   1010
-## 862    Red-tailed 373.0    960
-## 863    Red-tailed 385.0   1370
-## 864 Sharp-shinned 143.0    170
-## 865 Sharp-shinned 162.0    100
-## 866    Red-tailed 392.0   1250
-## 867    Red-tailed 372.0    915
-## 868    Red-tailed 375.0    850
-## 869    Red-tailed 415.0   1285
-## 870 Sharp-shinned 161.0     95
-## 871    Red-tailed 380.0   1005
-## 872    Red-tailed 411.0   1220
-## 873 Sharp-shinned 161.0     95
-## 874 Sharp-shinned 165.0    100
-## 875    Red-tailed 393.0   1265
-## 876    Red-tailed 370.0   1020
-## 877      Cooper&#39;s 230.0    360
-## 878    Red-tailed 365.0    895
-## 879    Red-tailed 371.0   1160
-## 880    Red-tailed 400.0   1585
-## 881    Red-tailed 382.0   1140
-## 882    Red-tailed 371.0   1115
-## 883    Red-tailed 370.0   1145
-## 884 Sharp-shinned 194.0    185
-## 885    Red-tailed 347.0    990
-## 886    Red-tailed 363.0    945
-## 887 Sharp-shinned 195.0    165
-## 888    Red-tailed 392.0   1030
-## 889      Cooper&#39;s 220.0    320
-## 890 Sharp-shinned 193.0    105
-## 891    Red-tailed 365.0    990
-## 892    Red-tailed 387.0   1065
-## 893    Red-tailed 400.0   1050
-## 894    Red-tailed 362.0    840
-## 895 Sharp-shinned 198.0    190
-## 896 Sharp-shinned 190.0    200
-## 897 Sharp-shinned 197.0    185
-## 898    Red-tailed 370.0   1000
-## 899 Sharp-shinned 200.0    185
-## 900    Red-tailed 360.0   1325
-## 901    Red-tailed 366.0    945
-## 902    Red-tailed 402.0   1350
-## 903    Red-tailed 366.0    805
-## 904    Red-tailed 380.0   1525
-## 905 Sharp-shinned 190.0    175
-## 906    Red-tailed 360.0    790
-## 907    Red-tailed 369.0    860
-## 908    Red-tailed 199.0   1290</code></pre>
+<pre class="r"><code>hawksFullName%&gt;%select(-Species)%&gt;%rename(Species=species_name_full)%&gt;%select(Species,Wing,Weight)%&gt;%head(7)</code></pre>
+<pre><code>##         Species Wing Weight
+## 1    Red-tailed  385    920
+## 2    Red-tailed  376    930
+## 3    Red-tailed  381    990
+## 4      Cooper&#39;s  265    470
+## 5 Sharp-shinned  205    170
+## 6    Red-tailed  412   1090
+## 7    Red-tailed  370    960</code></pre>
+</div>
+<div id="section-6" class="section level1">
+<h1>2.4</h1>
+<pre class="r"><code>Hawks%&gt;%mutate(bird_BMI=1000*Weight/Wing**2)%&gt;%select(Species,bird_BMI)%&gt;%arrange(desc(bird_BMI))</code></pre>
+<pre><code>##     Species    bird_BMI
+## 1        RT 852.6997341
+## 2        RT 108.7574061
+## 3        RT  32.5749350
+## 4        RT  22.7268814
+## 5        CH  22.4081790
+## 6        RT  19.5493229
+## 7        CH  15.2199762
+## 8        RT  14.8592739
+## 9        CH  14.7635525
+## 10       RT  14.6693259
+## 11       RT  12.2509090
+## 12       CH  11.0599449
+## 13       RT  10.5609418
+## 14       RT  10.4280395
+## 15       RT  10.2237654
+## 16       RT   9.9901839
+## 17       RT   9.9584872
+## 18       RT   9.9062500
+## 19       RT   9.7989334
+## 20       RT   9.6978082
+## 21       RT   9.6375748
+## 22       RT   9.6293389
+## 23       RT   9.6145939
+## 24       RT   9.5989481
+## 25       RT   9.4927987
+## 26       RT   9.4451004
+## 27       RT   9.4289114
+## 28       RT   9.3275742
+## 29       RT   9.2513911
+## 30       RT   9.2427053
+## 31       RT   9.1859641
+## 32       RT   9.1859641
+## 33       RT   9.1853741
+## 34       RT   9.1827365
+## 35       RT   9.1558965
+## 36       RT   9.1412742
+## 37       RT   9.1301893
+## 38       RT   9.1282191
+## 39       RT   9.1020408
+## 40       RT   9.0644808
+## 41       RT   8.9673614
+## 42       RT   8.9484739
+## 43       RT   8.9429012
+## 44       RT   8.9232600
+## 45       RT   8.9053803
+## 46       RT   8.7940951
+## 47       RT   8.7375079
+## 48       RT   8.7301587
+## 49       RT   8.6995768
+## 50       RT   8.6853064
+## 51       RT   8.6795073
+## 52       RT   8.6719666
+## 53       RT   8.6677145
+## 54       RT   8.6552478
+## 55       RT   8.6146230
+## 56       RT   8.5449219
+## 57       RT   8.5098612
+## 58       CH   8.5034014
+## 59       RT   8.5033457
+## 60       RT   8.4443610
+## 61       CH   8.4363136
+## 62       RT   8.4291188
+## 63       RT   8.4277214
+## 64       CH   8.4171598
+## 65       RT   8.4068305
+## 66       RT   8.4062500
+## 67       RT   8.4015963
+## 68       RT   8.3739202
+## 69       RT   8.3637692
+## 70       RT   8.3597121
+## 71       CH   8.3579882
+## 72       CH   8.3579882
+## 73       RT   8.3537536
+## 74       RT   8.3501538
+## 75       RT   8.3465369
+## 76       RT   8.3236287
+## 77       RT   8.3187422
+## 78       SS   8.3133650
+## 79       RT   8.3123472
+## 80       RT   8.3099281
+## 81       RT   8.2899704
+## 82       RT   8.2740779
+## 83       RT   8.2720518
+## 84       RT   8.2703214
+## 85       RT   8.2699932
+## 86       RT   8.2644628
+## 87       RT   8.2644628
+## 88       RT   8.2609341
+## 89       RT   8.2533638
+## 90       RT   8.2417778
+## 91       RT   8.2304527
+## 92       RT   8.2266634
+## 93       RT   8.2219768
+## 94       RT   8.2187500
+## 95       RT   8.2182774
+## 96       RT   8.2182774
+## 97       CH   8.2145244
+## 98       CH   8.2019716
+## 99       RT   8.1904059
+## 100      RT   8.1899585
+## 101      RT   8.1848889
+## 102      RT   8.1823415
+## 103      RT   8.1810920
+## 104      RT   8.1720407
+## 105      RT   8.1699346
+## 106      RT   8.1535587
+## 107      RT   8.1371559
+## 108      SS   8.1360947
+## 109      RT   8.1346314
+## 110      RT   8.1202711
+## 111      RT   8.1033817
+## 112      RT   8.1007839
+## 113      RT   8.1001418
+## 114      RT   8.0990805
+## 115      RT   8.0989701
+## 116      RT   8.0904224
+## 117      RT   8.0833570
+## 118      RT   8.0806040
+## 119      RT   8.0702530
+## 120      RT   8.0660555
+## 121      RT   8.0620678
+## 122      RT   8.0568082
+## 123      RT   8.0562500
+## 124      RT   8.0487949
+## 125      RT   8.0419503
+## 126      RT   8.0320821
+## 127      RT   8.0312500
+## 128      RT   8.0221453
+## 129      RT   7.9975656
+## 130      RT   7.9944673
+## 131      RT   7.9931854
+## 132      SS   7.9912345
+## 133      CH   7.9825160
+## 134      RT   7.9711254
+## 135      RT   7.9649054
+## 136      RT   7.9639889
+## 137      RT   7.9638673
+## 138      RT   7.9608703
+## 139      RT   7.9410351
+## 140      RT   7.9394002
+## 141      RT   7.9380317
+## 142      RT   7.9351553
+## 143      RT   7.9314207
+## 144      RT   7.9301617
+## 145      RT   7.9296424
+## 146      RT   7.9153445
+## 147      RT   7.9073564
+## 148      RT   7.9035612
+## 149      CH   7.9012346
+## 150      RT   7.8966468
+## 151      RT   7.8933333
+## 152      RT   7.8933333
+## 153      RT   7.8910857
+## 154      RT   7.8794832
+## 155      CH   7.8731293
+## 156      RT   7.8714529
+## 157      RT   7.8699820
+## 158      RT   7.8590018
+## 159      RT   7.8566732
+## 160      RT   7.8566732
+## 161      RT   7.8464992
+## 162      CH   7.8425064
+## 163      RT   7.8405018
+## 164      RT   7.8375000
+## 165      RT   7.8367347
+## 166      RT   7.8353285
+## 167      RT   7.8280851
+## 168      CH   7.8275157
+## 169      RT   7.8272684
+## 170      RT   7.8259603
+## 171      RT   7.8202305
+## 172      RT   7.8122858
+## 173      RT   7.8122858
+## 174      RT   7.8101728
+## 175      RT   7.7945837
+## 176      RT   7.7872136
+## 177      RT   7.7872136
+## 178      CH   7.7819824
+## 179      RT   7.7785916
+## 180      RT   7.7735835
+## 181      RT   7.7688122
+## 182      RT   7.7658969
+## 183      RT   7.7586143
+## 184      RT   7.7551674
+## 185      RT   7.7452610
+## 186      RT   7.7428780
+## 187      RT   7.7428780
+## 188      RT   7.7349608
+## 189      RT   7.7211244
+## 190      RT   7.7175040
+## 191      RT   7.7116306
+## 192      RT   7.7042687
+## 193      RT   7.7041150
+## 194      RT   7.7028740
+## 195      RT   7.7028596
+## 196      RT   7.7005331
+## 197      RT   7.6988653
+## 198      RT   7.6969979
+## 199      RT   7.6959052
+## 200      RT   7.6937512
+## 201      RT   7.6937512
+## 202      RT   7.6775566
+## 203      RT   7.6772266
+## 204      RT   7.6734694
+## 205      RT   7.6697531
+## 206      RT   7.6643925
+## 207      RT   7.6615488
+## 208      RT   7.6606339
+## 209      RT   7.6606086
+## 210      RT   7.6585918
+## 211      RT   7.6562500
+## 212      RT   7.6523546
+## 213      RT   7.6512727
+## 214      CH   7.6367863
+## 215      RT   7.6306725
+## 216      RT   7.6292772
+## 217      RT   7.6285658
+## 218      RT   7.6285658
+## 219      RT   7.6269836
+## 220      RT   7.6247166
+## 221      RT   7.6203959
+## 222      RT   7.6203060
+## 223      RT   7.6145152
+## 224      RT   7.6071311
+## 225      RT   7.6067374
+## 226      RT   7.6000000
+## 227      RT   7.5898128
+## 228      RT   7.5777929
+## 229      RT   7.5733333
+## 230      RT   7.5628906
+## 231      RT   7.5628906
+## 232      RT   7.5625000
+## 233      CH   7.5611962
+## 234      RT   7.5440014
+## 235      CH   7.5408715
+## 236      RT   7.5322362
+## 237      RT   7.5278531
+## 238      RT   7.5245390
+## 239      RT   7.5237400
+## 240      SS   7.5200000
+## 241      RT   7.5138504
+## 242      RT   7.5120192
+## 243      RT   7.5066487
+## 244      RT   7.5006113
+## 245      RT   7.4987983
+## 246      RT   7.4987983
+## 247      RT   7.4975390
+## 248      RT   7.4949787
+## 249      RT   7.4886153
+## 250      RT   7.4781967
+## 251      RT   7.4781831
+## 252      RT   7.4747574
+## 253      RT   7.4726077
+## 254      CH   7.4720624
+## 255      RT   7.4657942
+## 256      RT   7.4623699
+## 257      RT   7.4621959
+## 258      RT   7.4611700
+## 259      RT   7.4611700
+## 260      RT   7.4555234
+## 261      RT   7.4545965
+## 262      RT   7.4506939
+## 263      RT   7.4431596
+## 264      RT   7.4400149
+## 265      RT   7.4400149
+## 266      RT   7.4375000
+## 267      RT   7.4317993
+## 268      RT   7.4311111
+## 269      RT   7.4310377
+## 270      RT   7.4228342
+## 271      RT   7.4187838
+## 272      CH   7.4132793
+## 273      RT   7.4026598
+## 274      RT   7.4011129
+## 275      CH   7.4011086
+## 276      RT   7.4004515
+## 277      RT   7.3980558
+## 278      RT   7.3934867
+## 279      RT   7.3913698
+## 280      RT   7.3841344
+## 281      RT   7.3836119
+## 282      RT   7.3827485
+## 283      RT   7.3825958
+## 284      RT   7.3795086
+## 285      RT   7.3754992
+## 286      RT   7.3742562
+## 287      RT   7.3706127
+## 288      RT   7.3635766
+## 289      RT   7.3635766
+## 290      CH   7.3613365
+## 291      RT   7.3589485
+## 292      RT   7.3586646
+## 293      RT   7.3524756
+## 294      RT   7.3492001
+## 295      RT   7.3437500
+## 296      RT   7.3436574
+## 297      RT   7.3407096
+## 298      RT   7.3400468
+## 299      RT   7.3379298
+## 300      RT   7.3259594
+## 301      RT   7.3244444
+## 302      RT   7.3213397
+## 303      RT   7.3209031
+## 304      RT   7.3199528
+## 305      RT   7.3193288
+## 306      RT   7.3172963
+## 307      RT   7.3156326
+## 308      RT   7.3120949
+## 309      RT   7.3098906
+## 310      RT   7.3075256
+## 311      RT   7.3046019
+## 312      RT   7.2985316
+## 313      RT   7.2953877
+## 314      RT   7.2903103
+## 315      RT   7.2903103
+## 316      RT   7.2809157
+## 317      RT   7.2786316
+## 318      RT   7.2778746
+## 319      RT   7.2562358
+## 320      RT   7.2494735
+## 321      RT   7.2494735
+## 322      RT   7.2488950
+## 323      RT   7.2462222
+## 324      RT   7.2460018
+## 325      RT   7.2402726
+## 326      RT   7.2368421
+## 327      RT   7.2340832
+## 328      RT   7.2314740
+## 329      RT   7.2235727
+## 330      RT   7.2223110
+## 331      RT   7.2206812
+## 332      RT   7.2197324
+## 333      RT   7.2145062
+## 334      RT   7.2095865
+## 335      RT   7.2086448
+## 336      RT   7.2077297
+## 337      RT   7.2022161
+## 338      RT   7.2017759
+## 339      RT   7.1998839
+## 340      RT   7.1980964
+## 341      RT   7.1980964
+## 342      RT   7.1926243
+## 343      RT   7.1920867
+## 344      RT   7.1910142
+## 345      RT   7.1885851
+## 346      RT   7.1822222
+## 347      RT   7.1755156
+## 348      RT   7.1716413
+## 349      RT   7.1684149
+## 350      RT   7.1663379
+## 351      RT   7.1653107
+## 352      RT   7.1646534
+## 353      RT   7.1578377
+## 354      RT   7.1478429
+## 355      RT   7.1466667
+## 356      RT   7.1462907
+## 357      RT   7.1424613
+## 358      RT   7.1414402
+## 359      RT   7.1386080
+## 360      RT   7.1330590
+## 361      RT   7.1309859
+## 362      RT   7.1283816
+## 363      RT   7.1283816
+## 364      RT   7.1269976
+## 365      RT   7.1239195
+## 366      RT   7.1178749
+## 367      RT   7.1156984
+## 368      CH   7.1113258
+## 369      RT   7.1109509
+## 370      RT   7.1075734
+## 371      RT   7.1062204
+## 372      RT   7.1005917
+## 373      RT   7.0955697
+## 374      RT   7.0888469
+## 375      RT   7.0817436
+## 376      RT   7.0625000
+## 377      RT   7.0611252
+## 378      RT   7.0608601
+## 379      RT   7.0545552
+## 380      RT   7.0500928
+## 381      RT   7.0471691
+## 382      RT   7.0456122
+## 383      RT   7.0438226
+## 384      RT   7.0420997
+## 385      RT   7.0400000
+## 386      RT   7.0400000
+## 387      RT   7.0379697
+## 388      RT   7.0314186
+## 389      RT   7.0235877
+## 390      RT   7.0216581
+## 391      RT   7.0163603
+## 392      RT   7.0152436
+## 393      RT   7.0124178
+## 394      RT   7.0124178
+## 395      RT   7.0078848
+## 396      RT   7.0073988
+## 397      CH   7.0064549
+## 398      CH   7.0022982
+## 399      RT   6.9966096
+## 400      RT   6.9899400
+## 401      RT   6.9893581
+## 402      RT   6.9827580
+## 403      RT   6.9819153
+## 404      RT   6.9799038
+## 405      RT   6.9792969
+## 406      RT   6.9758948
+## 407      RT   6.9690993
+## 408      RT   6.9672363
+## 409      RT   6.9636908
+## 410      RT   6.9618006
+## 411      RT   6.9598338
+## 412      RT   6.9577917
+## 413      RT   6.9548388
+## 414      RT   6.9501600
+## 415      RT   6.9444444
+## 416      RT   6.9443906
+## 417      RT   6.9439701
+## 418      CH   6.9398787
+## 419      RT   6.9393718
+## 420      RT   6.9357639
+## 421      RT   6.9333333
+## 422      RT   6.9252078
+## 423      RT   6.9249401
+## 424      CH   6.9214876
+## 425      RT   6.9209637
+## 426      CH   6.9135802
+## 427      RT   6.9127042
+## 428      RT   6.9095043
+## 429      RT   6.9033531
+## 430      RT   6.9033531
+## 431      RT   6.9033531
+## 432      RT   6.9000712
+## 433      CH   6.8998110
+## 434      RT   6.8951446
+## 435      RT   6.8889027
+## 436      RT   6.8763868
+## 437      RT   6.8686419
+## 438      RT   6.8680869
+## 439      RT   6.8672840
+## 440      RT   6.8662027
+## 441      RT   6.8656868
+## 442      RT   6.8631069
+## 443      RT   6.8594104
+## 444      RT   6.8559557
+## 445      RT   6.8528823
+## 446      RT   6.8495009
+## 447      RT   6.8458214
+## 448      RT   6.8338203
+## 449      RT   6.8282274
+## 450      RT   6.8266667
+## 451      RT   6.8224706
+## 452      RT   6.8213296
+## 453      RT   6.8200136
+## 454      RT   6.8062500
+## 455      CH   6.8052930
+## 456      RT   6.8038101
+## 457      RT   6.7983606
+## 458      RT   6.7917298
+## 459      RT   6.7913988
+## 460      RT   6.7892086
+## 461      RT   6.7877556
+## 462      RT   6.7749081
+## 463      RT   6.7718606
+## 464      RT   6.7699714
+## 465      RT   6.7691501
+## 466      CH   6.7666282
+## 467      RT   6.7664698
+## 468      RT   6.7608173
+## 469      RT   6.7555556
+## 470      RT   6.7555556
+## 471      RT   6.7543253
+## 472      RT   6.7535084
+## 473      RT   6.7519334
+## 474      RT   6.7210633
+## 475      RT   6.7204301
+## 476      RT   6.7202337
+## 477      RT   6.7202337
+## 478      RT   6.7187369
+## 479      RT   6.7179583
+## 480      CH   6.7160494
+## 481      RT   6.7089718
+## 482      RT   6.7029363
+## 483      RT   6.7029363
+## 484      RT   6.6953210
+## 485      CH   6.6927732
+## 486      RT   6.6844439
+## 487      RT   6.6827150
+## 488      CH   6.6792913
+## 489      RT   6.6790353
+## 490      RT   6.6753467
+## 491      RT   6.6732413
+## 492      RT   6.6655985
+## 493      RT   6.6627008
+## 494      RT   6.6591892
+## 495      RT   6.6489362
+## 496      RT   6.6481994
+## 497      RT   6.6481674
+## 498      RT   6.6472959
+## 499      RT   6.6460503
+## 500      RT   6.6453027
+## 501      RT   6.6435644
+## 502      CH   6.6162571
+## 503      RT   6.6148453
+## 504      RT   6.6125682
+## 505      RT   6.6120361
+## 506      RT   6.6115702
+## 507      CH   6.6115702
+## 508      RT   6.6098222
+## 509      RT   6.6093634
+## 510      CH   6.6073336
+## 511      RT   6.6053806
+## 512      CH   6.5974625
+## 513      RT   6.5818090
+## 514      RT   6.5789474
+## 515      RT   6.5789016
+## 516      RT   6.5785437
+## 517      RT   6.5782028
+## 518      RT   6.5777778
+## 519      RT   6.5773578
+## 520      RT   6.5757617
+## 521      RT   6.5750757
+## 522      RT   6.5746220
+## 523      RT   6.5746220
+## 524      CH   6.5724206
+## 525      RT   6.5717486
+## 526      RT   6.5694427
+## 527      RT   6.5686785
+## 528      RT   6.5682073
+## 529      RT   6.5680473
+## 530      RT   6.5645182
+## 531      RT   6.5625000
+## 532      RT   6.5444575
+## 533      SS   6.5443270
+## 534      RT   6.5429376
+## 535      RT   6.5428361
+## 536      RT   6.5422222
+## 537      RT   6.5393755
+## 538      CH   6.5372085
+## 539      CH   6.5298507
+## 540      RT   6.5024230
+## 541      RT   6.5000000
+## 542      CH   6.4982464
+## 543      RT   6.4755685
+## 544      RT   6.4729928
+## 545      CH   6.4677769
+## 546      RT   6.4629373
+## 547      RT   6.4506826
+## 548      RT   6.4468409
+## 549      RT   6.4432564
+## 550      RT   6.4429077
+## 551      RT   6.4406693
+## 552      RT   6.4392313
+## 553      RT   6.4367361
+## 554      RT   6.4272212
+## 555      CH   6.4272212
+## 556      CH   6.4272212
+## 557      RT   6.4214346
+## 558      CH   6.4197531
+## 559      RT   6.4100607
+## 560      RT   6.4095680
+## 561      RT   6.4082635
+## 562      RT   6.4082635
+## 563      CH   6.4041608
+## 564      RT   6.4035860
+## 565      RT   6.4026342
+## 566      RT   6.3985244
+## 567      RT   6.3775510
+## 568      RT   6.3747830
+## 569      RT   6.3688027
+## 570      RT   6.3490125
+## 571      RT   6.3417102
+## 572      RT   6.3377905
+## 573      RT   6.3338092
+## 574      CH   6.3327032
+## 575      RT   6.3288889
+## 576      RT   6.3160523
+## 577      RT   6.3104474
+## 578      RT   6.3059663
+## 579      RT   6.2905334
+## 580      RT   6.2891669
+## 581      RT   6.2700773
+## 582      CH   6.2627788
+## 583      RT   6.2574402
+## 584      CH   6.2381853
+## 585      RT   6.2344569
+## 586      RT   6.2326870
+## 587      RT   6.2289228
+## 588      RT   6.2188668
+## 589      CH   6.2130178
+## 590      RT   6.2075190
+## 591      CH   6.2073900
+## 592      RT   6.2067802
+## 593      RT   6.2067802
+## 594      RT   6.2006920
+## 595      SS   6.2003968
+## 596      RT   6.1875000
+## 597      RT   6.1723886
+## 598      RT   6.1713325
+## 599      CH   6.1706791
+## 600      RT   6.1557402
+## 601      CH   6.1466341
+## 602      RT   6.1250000
+## 603      SS   6.1245675
+## 604      RT   6.1024582
+## 605      RT   6.0956790
+## 606      RT   6.0951462
+## 607      RT   6.0830693
+## 608      RT   6.0800000
+## 609      RT   6.0628196
+## 610      RT   6.0550567
+## 611      RT   6.0486522
+## 612      RT   6.0444444
+## 613      RT   6.0379181
+## 614      RT   6.0341484
+## 615      RT   6.0235879
+## 616      RT   6.0094359
+## 617      RT   6.0012065
+## 618      CH   5.9680598
+## 619      RT   5.9591837
+## 620      RT   5.9488400
+## 621      CH   5.9259259
+## 622      CH   5.9212313
+## 623      RT   5.9171598
+## 624      RT   5.9118929
+## 625      CH   5.9027778
+## 626      RT   5.8934788
+## 627      RT   5.8765432
+## 628      RT   5.8669067
+## 629      RT   5.8440946
+## 630      RT   5.7918576
+## 631      CH   5.6563193
+## 632      RT   5.6094183
+## 633      SS   5.5797641
+## 634      SS   5.5401662
+## 635      RT   5.5008409
+## 636      SS   5.4368832
+## 637      SS   5.3692717
+## 638      CH   5.3539934
+## 639      SS   5.3363182
+## 640      RT   5.2631579
+## 641      SS   5.2596976
+## 642      SS   5.2081906
+## 643      SS   5.2081906
+## 644      SS   5.2061641
+## 645      RT   5.2001230
+## 646      CH   5.1975792
+## 647      SS   5.1540799
+## 648      SS   5.1282051
+## 649      SS   5.1008081
+## 650      SS   5.1008081
+## 651      SS   5.0988837
+## 652      SS   5.0503775
+## 653      SS   4.9934226
+## 654      SS   4.9861496
+## 655      SS   4.9671293
+## 656      SS   4.9665763
+## 657      SS   4.9665763
+## 658      SS   4.9513354
+## 659      SS   4.9493700
+## 660      SS   4.9259876
+## 661      SS   4.9155064
+## 662      SS   4.9155064
+## 663      SS   4.8591909
+## 664      SS   4.8476454
+## 665      SS   4.8476454
+## 666      SS   4.8476454
+## 667      SS   4.8464442
+## 668      SS   4.8323445
+## 669      SS   4.8157018
+## 670      SS   4.7978586
+## 671      SS   4.7970176
+## 672      SS   4.7954290
+## 673      SS   4.7789432
+## 674      SS   4.7789432
+## 675      SS   4.7776882
+## 676      SS   4.7669355
+## 677      SS   4.7471788
+## 678      CH   4.7221030
+## 679      SS   4.7189062
+## 680      SS   4.7189062
+## 681      SS   4.7091413
+## 682      SS   4.7047311
+## 683      SS   4.6855477
+## 684      SS   4.6715992
+## 685      SS   4.6599600
+## 686      SS   4.6533502
+## 687      SS   4.6498034
+## 688      SS   4.6349098
+## 689      SS   4.6250000
+## 690      SS   4.6168758
+## 691      SS   4.6162998
+## 692      SS   4.6115451
+## 693      SS   4.6115451
+## 694      SS   4.6022354
+## 695      SS   4.5790946
+## 696      SS   4.5786148
+## 697      SS   4.5782136
+## 698      SS   4.5655517
+## 699      SS   4.5553936
+## 700      RT   4.5508067
+## 701      SS   4.5453398
+## 702      SS   4.5429363
+## 703      SS   4.5351474
+## 704      SS   4.5229023
+## 705      SS   4.5169519
+## 706      SS   4.5092633
+## 707      SS   4.5000000
+## 708      SS   4.4893106
+## 709      SS   4.4870768
+## 710      SS   4.4707429
+## 711      SS   4.4707429
+## 712      SS   4.4296491
+## 713      SS   4.4190803
+## 714      SS   4.4190803
+## 715      SS   4.4113322
+## 716      SS   4.4113322
+## 717      SS   4.3841003
+## 718      SS   4.3841003
+## 719      SS   4.3750000
+## 720      SS   4.3679779
+## 721      SS   4.3679779
+## 722      SS   4.3547685
+## 723      SS   4.3510937
+## 724      SS   4.3392505
+## 725      SS   4.3315760
+## 726      CH   4.3309597
+## 727      SS   4.3252595
+## 728      SS   4.3252595
+## 729      SS   4.3174870
+## 730      SS   4.3036101
+## 731      SS   4.2887952
+## 732      SS   4.2831648
+## 733      SS   4.2709117
+## 734      SS   4.2598077
+## 735      SS   4.2515911
+## 736      SS   4.2515911
+## 737      SS   4.2487870
+## 738      SS   4.2436634
+## 739      SS   4.1914342
+## 740      SS   4.1878816
+## 741      SS   4.1878816
+## 742      SS   4.1733198
+## 743      SS   4.1665615
+## 744      SS   4.1649313
+## 745      SS   4.1649313
+## 746      SS   4.1641880
+## 747      SS   4.1623309
+## 748      SS   4.1623309
+## 749      SS   4.1533167
+## 750      SS   4.1250000
+## 751      SS   4.1250000
+## 752      SS   4.1234895
+## 753      SS   4.1227550
+## 754      SS   4.1183973
+## 755      SS   4.1183973
+## 756      SS   4.1091387
+## 757      SS   4.1043084
+## 758      SS   4.1015625
+## 759      SS   4.0840573
+## 760      SS   4.0762656
+## 761      SS   4.0562466
+## 762      SS   4.0507696
+## 763      SS   4.0507696
+## 764      SS   4.0452112
+## 765      SS   4.0369089
+## 766      SS   4.0347772
+## 767      SS   4.0302010
+## 768      SS   4.0292118
+## 769      SS   4.0057683
+## 770      SS   4.0039797
+## 771      SS   4.0009145
+## 772      SS   4.0000000
+## 773      SS   3.9918711
+## 774      SS   3.9519741
+## 775      SS   3.9447732
+## 776      SS   3.9407920
+## 777      SS   3.9140426
+## 778      SS   3.9100346
+## 779      SS   3.9039262
+## 780      SS   3.8939968
+## 781      SS   3.8831361
+## 782      SS   3.8689590
+## 783      SS   3.8625904
+## 784      SS   3.8578759
+## 785      SS   3.8578759
+## 786      SS   3.8567493
+## 787      SS   3.8567493
+## 788      SS   3.8526942
+## 789      SS   3.8500000
+## 790      SS   3.8206459
+## 791      SS   3.8132807
+## 792      SS   3.8104224
+## 793      SS   3.8104224
+## 794      SS   3.8103948
+## 795      SS   3.8103948
+## 796      SS   3.8062284
+## 797      SS   3.8054799
+## 798      SS   3.7807183
+## 799      SS   3.7649252
+## 800      SS   3.7637849
+## 801      SS   3.7637849
+## 802      SS   3.7637849
+## 803      SS   3.7637849
+## 804      SS   3.7577627
+## 805      SS   3.7577627
+## 806      SS   3.7324029
+## 807      SS   3.7202381
+## 808      SS   3.7202381
+## 809      SS   3.7120761
+## 810      SS   3.7109375
+## 811      SS   3.7109375
+## 812      SS   3.6982249
+## 813      SS   3.6763419
+## 814      SS   3.6761102
+## 815      SS   3.6730946
+## 816      SS   3.6730946
+## 817      SS   3.6649821
+## 818      SS   3.6649821
+## 819      SS   3.6649821
+## 820      SS   3.6649821
+## 821      SS   3.6649821
+## 822      SS   3.6436645
+## 823      SS   3.6399816
+## 824      SS   3.6198750
+## 825      SS   3.6171333
+## 826      SS   3.6139456
+## 827      SS   3.5996327
+## 828      SS   3.5937500
+## 829      SS   3.5856431
+## 830      SS   3.5599858
+## 831      SS   3.5492158
+## 832      SS   3.5430839
+## 833      SS   3.5430839
+## 834      SS   3.5321237
+## 835      SS   3.5265306
+## 836      SS   3.5261708
+## 837      SS   3.5156250
+## 838      SS   3.5156250
+## 839      SS   3.5156250
+## 840      SS   3.5012780
+## 841      SS   3.4948097
+## 842      SS   3.4938776
+## 843      SS   3.4927679
+## 844      SS   3.4894399
+## 845      SS   3.4894399
+## 846      SS   3.4894399
+## 847      SS   3.4894399
+## 848      SS   3.4720883
+## 849      SS   3.4720883
+## 850      SS   3.4602076
+## 851      SS   3.4568806
+## 852      SS   3.4414782
+## 853      SS   3.4198557
+## 854      SS   3.4112353
+## 855      SS   3.3874064
+## 856      SS   3.3792470
+## 857      SS   3.3746302
+## 858      SS   3.3659297
+## 859      SS   3.3659297
+## 860      SS   3.3462225
+## 861      SS   3.3412409
+## 862      SS   3.3262141
+## 863      SS   3.3126014
+## 864      SS   3.2912013
+## 865      SS   3.2839918
+## 866      SS   3.2770513
+## 867      SS   3.2488629
+## 868      SS   3.2488629
+## 869      SS   3.2388355
+## 870      SS   3.2326531
+## 871      SS   3.2283058
+## 872      SS   3.2238501
+## 873      SS   3.2179931
+## 874      SS   3.2177421
+## 875      CH   3.2037254
+## 876      SS   3.1141869
+## 877      SS   3.0961729
+## 878      SS   3.0795848
+## 879      SS   3.0778701
+## 880      SS   3.0717400
+## 881      SS   3.0623819
+## 882      SS   3.0094730
+## 883      SS   3.0083829
+## 884      CH   3.0080149
+## 885      SS   2.9649512
+## 886      SS   2.9046570
+## 887      SS   2.8405504
+## 888      SS   2.8188676
+## 889      SS   2.7551853
+## 890      SS   2.6846358
+## 891      SS   2.3795360
+## 892      CH   2.2363281
+## 893      RT   1.7155181
+## 894      RT   1.6446908
+## 895      RT   1.5779093
+## 896      CH   0.7796837
+## 897      RT   0.5864422
+## 898      RT          NA
+## 899      RT          NA
+## 900      SS          NA
+## 901      SS          NA
+## 902      CH          NA
+## 903      SS          NA
+## 904      RT          NA
+## 905      RT          NA
+## 906      SS          NA
+## 907      SS          NA
+## 908      RT          NA</code></pre>
 </div>
 
 
