@@ -1,0 +1,102 @@
+---
+title: "Assignment3"
+author: "xiaoyi"
+date: "10/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1 
+- random experiment: is a procedure
+1) has a well-defined set of possible outcomes
+2) could be repeated arbitrarily many times
+- event
+is a set of possible outcomes
+- sample space is the set of all possible outcomes
+
+# 2.1
+```{r}
+library(tidyverse)
+
+impute_by_median<-function(x){
+  
+  md<-median(x,na.rm=1)
+  
+  impute_f<-function(z){
+    if(is.na(z)){
+      return(md)
+    }else{
+      return(z)
+    }
+  }
+    return(map_dbl(x,impute_f))
+}
+
+v<-c(1,2,NA,4)
+impute_by_median(v)
+
+
+x<-seq(0,10,0.1)
+
+y<-5*x + 1
+
+df_xy<-data.frame(x,y)
+
+df_xy%>%head(5)    
+
+df_xy%>%
+mutate(z=map2_dbl(x,y,~.x+.y))%>%
+head(5)
+
+sometimes_missing<-function(index,value){
+  if(index %% 5 ==0){
+    return (NA)
+    }else{
+      return (value)
+    }
+  }
+
+
+#sometimes_missing(14,25)
+#sometimes_missing(15,25)
+
+# how to use row_number() to extract the index?
+df_xy_missing<-df_xy%>%
+    mutate(y=map2_dbl(x,y,~sometimes_missing(match(.y,y),.y)))
+
+#df_xy_missing%>%head(10)
+
+df_xy_impute<-df_xy_missing%>%
+  mutate(y=impute_by_median(y))
+ 
+df_xy_impute%>%head(10)
+  
+df_xy<-df_xy%>%
+mutate(source="original")
+df_xy_missing<-df_xy_missing%>%
+mutate(source="corrupted")
+df_xy_impute<-df_xy_impute%>%
+mutate(source="imputed")
+
+df_combined<-rbind(df_xy,df_xy_missing,df_xy_impute)
+df_combined%>% head()
+
+ggplot(df_combined,aes(x=x,y=y,color=source))+
+  geom_point()+
+  facet_wrap(~source)+
+  geom_smooth(method='lm')
+
+
+```
+# 2.2
+```{r}
+library(readxl)
+folder_path<-"HockeyLeague.xlsx"
+```
+
+
+
+
