@@ -93,9 +93,73 @@ ggplot(df_combined,aes(x=x,y=y,color=source))+
 ```
 # 2.2
 ```{r}
+library(tidyverse)
 library(readxl)
-folder_path<-"HockeyLeague.xlsx"
+
+#folder_path<-"~/Desktop/"
+folder_path<-"~/RstudioProjects/xy_firstRProject/"
+file_name<-"HockeyLeague.xlsx"
+
+file_path<-paste(folder_path,file_name,sep="")
+
+wins_data_frame<-read_excel(file_path,sheet="Wins")
+
+
+
+wins_tidy<- wins_data_frame %>%
+#  rename("Team"=colnames(wins_data_frame[1])) %>%
+  rename("Team"=c(1)) %>%
+  pivot_longer(!Team,names_to ="Year",values_to = "Wins" )%>%
+  separate(Wins,into=c("Wins","Total"),sep="of")%>%
+  transform(Wins = as.integer(Wins))%>%
+  transform(Total = as.integer(Total))
+  
+  
+#  transform(wins_tidy$Wins<-as.integer(wins_tidy$Wins))
+#  transform(wins_tidy$Total<-as.integer(wins_tidy$Total))
+
+
+  
+wins_tidy
+
+#wins_tidy%>% dim()
+#wins_tidy%>% head(5) 
+
+
+folder_path<-"~/RstudioProjects/xy_firstRProject/"
+file_name<-"HockeyLeague.xlsx"
+
+file_path<-paste(folder_path,file_name,sep="")
+
+losses_data_frame<-read_excel(file_path,sheet="Losses")
+losses_tidy<-losses_data_frame%>%
+  rename("Team"=c(1))%>%
+  pivot_longer(!Team,names_to ="Year",values_to = "Losses" )%>%
+  separate(Losses,into=c("Losses","Total"),sep="of") 
+
+losses_tidy
+
+  transform(losses_tidy$Losses<-as.integer(losses_tidy$Losses))
+  transform(losses_tidy$Total<-as.integer(losses_tidy$Total))
+
+
+hockey_df<-inner_join(wins_tidy,losses_tidy)%>%
+  mutate(Draws=Total-Wins-Losses,Wins_rt=Wins/Total,Losses_rt=Losses/Total,Draws_rt=Draws/Total)
+
+#???????? 
+'hockey_df%>%
+mutate(c("Wins_rt","Losses_r","Draw_rt")<-across(c("Wins","Losses","Draws"),~.x/"Total"))
+  '
+
+hockey_df %>%
+  group_by(Team)%>%
+  summarise(row_number=n(),across(c("Wins_rt","Losses_rt","Draws_rt"),
+            list(mean=~mean(.x,na.rm=1),
+                 md=~median(.x,na.rm=1))))%>%
+  arrange(desc(Wins_rt_md))
+
 ```
+
 
 
 
