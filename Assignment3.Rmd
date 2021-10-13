@@ -158,6 +158,52 @@ hockey_df %>%
 
 ```
 
+
+# 2.3
+```{r}
+
+top_correlateds_by_var<-function(df){
+  
+  max_abs_cor_vars<-list()
+  col_names<-df%>%
+    select_if(is.numeric)%>%
+    colnames()
+  #print(col_names)
+
+  for(col_name in col_names){
+    print(col_name)
+    v_col<-df%>%select(all_of(col_name))
+    df_num<-df%>%
+    select_if(is.numeric)%>%
+    select(-all_of(col_name))
+    
+  correlations<-unlist(map(df_num,function(x){cor(x,v_col,use="complete.obs")}))
+  max_abs_cor_var<-names(which(abs(correlations)==max(abs(correlations))))
+  max_abs_cor_vars<-append(max_abs_cor_vars,max_abs_cor_var)
+  
+  }
+
+  cor_df <- as.data.frame(max_abs_cor_vars)
+  
+  #!!!
+  names(cor_df) <- col_names
+    return(cor_df)
+
+}
+
+library(palmerpenguins)
+
+
+top_correlateds_by_var(penguins)
+
+penguins%>%
+  group_by(species)%>%
+  nest()%>%
+  mutate(data=top_correlateds_by_var(as.data.frame(data)))%>%
+  unnest(cols = c(data))
+
+```
+
 # 3.1
 
 $A\cup B=\{1,2,3,4,6\}$
@@ -197,20 +243,34 @@ $x \in (A\cup B)^c \Leftrightarrow x \notin A\cup B \Leftrightarrow x \notin A \
 $(\bigcup\limits_{k=1}^{K} A_{k})^c = \bigcap\limits_{k=1}^{K} (A_{k})^c$
 
 
+
 # 3.3
 
 $the\ cardinality\  of \varepsilon = 2^K$
  
-```{r}
+# 3.4
+$ \varnothing$ is a set that is disjoint form every other set
+$ S_1 \cup S_2 = A_2$
+$ S_1 \cup (S_1 \cup S_2)= A_1 \cup A_2$
+$ (S_1 \cup (S_1 \cup S_2)) \cup S_3= A_3$
+$ S_1 \cup (S_1 \cup S_2) \cup ((S_1 \cup (S_1 \cup S_2)) \cup S_3) \cup S_4=A_4$
+$ S_1 \cup (S_1 \cup S_2) \cup (S_1 \cup (S_1 \cup S_2)) \cup S_3 \cup S_1 \cup (S_1 \cup S_2) \cup ((S_1 \cup (S_1 \cup S_2)) \cup S_3) \cup S_4 = A_1 \cup A_2 \cup A_3 \cup A_4 \Leftrightarrow S_1 \cup S_2 \cup S_3 \cup S_4 = A_1 \cup A_2 \cup A_3 \cup A_4$
 
 
-```
 
 
+# 4.1
+$\mathbb{P}(S^c)=\mathbb{P}(\Omega)-\mathbb{P}(S)$
+Since $\mathbb{P}(\Omega)=1$
+$\mathbb{P}(S^c)=1-\mathbb{P}(S)$
 
+# 4.2
+a sequence of sets $A_1,A_2,A_3...,by A_1:=S_1,A_2:=S_2 \backslash S_1,A_3:=S_3\backslash(S_1\cup S_2) $ and so on with $A_i:=S_i\backslash(\bigcup_{j<i}S_j)=S_i\backslash(S_1\cup S_2\cup ...\cup\ S_{i-1})$
 
-
-
+# 4.3
+Rule1:$ q \in [0:1]$for every event $A \in \varepsilon, \mathbb{P}(A)\geq0 $
+Rule2:$ \Omega=\{0,1\}$,Since$ \mathbb{P}(A):=1$,if$ A=\{0,1\}$,so $\mathbb{P}(\Omega)=1$
+Rule3: Because event A={0},A={1},A={0,1} are not pairwise disjoint, so it doesn't satisfies the Rule3 
 
 
 
