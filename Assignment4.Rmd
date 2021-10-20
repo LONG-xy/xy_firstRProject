@@ -1,0 +1,113 @@
+---
+title: "Assignment4"
+author: "xiaoyi"
+date: "18/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 3
+
+\[\binom{35}{z}\Big(\dfrac{3}{10}\Big)^{z}\big(\dfrac{7}{10})^{1-z}\]
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+prob_red_spheres<-function(z){
+  prob_red = 3/10
+  return   (choose(35,z)*(prob_red)^z*(1-prob_red)^(35-z))
+}
+
+prob_red_spheres(20)
+
+
+prob_by_num_reds<-data.frame(num_reds=seq(1,35),prob=(prob_red_spheres(num_reds)))
+prob_by_num_reds %>% head(3)
+
+prob_by_num_reds%>%
+ggplot(aes(x=num_reds,y=prob))+
+  theme_bw()+
+  xlab("Number of reds")+
+  ylab("Probability")+
+  geom_line()
+
+
+
+num_trials<-1000 # set the number of trials
+set.seed(0) # set the random seed
+sampling_with_replacement_simulation<-data.frame(trial=1:num_trials)%>%
+  mutate(sample_balls=map(.x=trial,~sample(10,35,replace = TRUE)))%>%
+  mutate(num_reds=map_dbl(.x=sample_balls,~sum(.x <=3)))
+
+sampling_with_replacement_simulation
+
+
+num_reds_in_simulation<-sampling_with_replacement_simulation%>%pull(num_reds)
+# we extract a vector corresponding to the number of reds in each trial
+
+prob_by_num_reds$num_reds
+
+prob_by_num_reds<-prob_by_num_reds%>%
+  mutate(simulation_count=map_dbl(.x=num_reds,~sum(num_reds_in_simulation==.x)))
+# add a column which gives the number of trials with a given number of reds
+
+
+prob_by_num_reds<-prob_by_num_reds%>%
+  mutate(expected_count=num_trials*prob)
+
+prob_by_num_reds%>%head(5)
+
+pro<-prob_by_num_reds%>%
+  rename(Simulation=simulation_count,Expected=expected_count)%>%
+  pivot_longer(cols=c("Simulation","Expected"),
+                names_to="Type",values_to="count")
+pro
+pro%>%
+  ggplot(aes(num_reds,count)) +
+        geom_line(aes(linetype=Type, color=Type)) +
+        scale_linetype_manual(values = c("solid", "dashed"))+
+  theme_bw()+
+  xlab("Number of reds")+
+  ylab("Count")
+
+
+```
+
+```{r}
+set.seed(0)
+
+num_of_trials<-50
+num_red_spheres<-50
+num_blue_spheres<-30
+num_green_spheres<-20
+
+sampling_without_replacement_simulation<-data.frame(trial=1:num_of_trials)%>%
+mutate(sample_balls=map(.x=trial,~sample(100,10,replace = FALSE)))
+
+sampling_without_replacement_simulation$sample_balls
+
+sampling_without_replacement_simulation%>%
+  mutate(reds=map_dbl(.x=sample_balls,~sum(unlist(.x)<=50)))%>%
+  mutate(blues=map_dbl(.x=sample_balls,~sum(unlist(.x)<=80 &unlist(.x)>50)))%>%
+  mutate(greens=map_dbl(.x=sample_balls,~sum(unlist(.x)>80)))
+
+pmin(sampling_without_replacement_simulation$reds,sampling_without_replacement_simulation$blues,sampling_without_replacement_simulation$greens)
+
+
+```
+
+
+# 6
+$ P(A_{3})=\dfrac{1}{3}$
+$ P(B_{1}\cap C_{2})=\dfrac{1}{3}\big(\dfrac{1}{2}+0+1\big)=\dfrac{1}{2}$
+$ P(B_{1}C_{2}\mid A_{3})=1$
+
+$ P(A_{3}B_{1}C_{2})=\dfrac{2}{3}$
+good strategy：change the initial choice
+
+# 7
+$(P)^{k-n+x}(1-P)^{x},\ x\in(0,+\infty)$
+
