@@ -79,23 +79,44 @@ pro%>%
 ```{r}
 set.seed(0)
 
-num_of_trials<-50
-num_red_spheres<-50
-num_blue_spheres<-30
-num_green_spheres<-20
+num_of_trials=5000
+num_total_spheres=100
+sample_size=10
+num_red_spheres=50
+num_blue_spheres=30
+num_green_spheres=20
 
 sampling_without_replacement_simulation<-data.frame(trial=1:num_of_trials)%>%
-mutate(sample_balls=map(.x=trial,~sample(100,10,replace = FALSE)))
+mutate(sample_balls=map(.x=trial,~sample(num_total_spheres,sample_size,replace = FALSE)))
 
-sampling_without_replacement_simulation$sample_balls
-
-sampling_without_replacement_simulation%>%
+sampling_without_replacement_simulation<-sampling_without_replacement_simulation%>%
   mutate(reds=map_dbl(.x=sample_balls,~sum(unlist(.x)<=50)))%>%
   mutate(blues=map_dbl(.x=sample_balls,~sum(unlist(.x)<=80 &unlist(.x)>50)))%>%
-  mutate(greens=map_dbl(.x=sample_balls,~sum(unlist(.x)>80)))
+  mutate(greens=map_dbl(.x=sample_balls,~sum(unlist(.x)>80)))%>%
+  mutate(colour_missing=(pmin(reds,blues,greens)==0))
+#
 
-pmin(sampling_without_replacement_simulation$reds,sampling_without_replacement_simulation$blues,sampling_without_replacement_simulation$greens)
+sampling_without_replacement_simulation
 
+prob_missing_simulation<-mean(sampling_without_replacement_simulation%>%pull(colour_missing))
+
+#pull() creates a vector -- which, in this case, is numeric -- whereas select() creates a data frame.
+prob_missing_simulation
+
+NR=choose(num_total_spheres-num_red_spheres,sample_size)
+NG=choose(num_total_spheres-num_green_spheres,sample_size)
+NB=choose(num_total_spheres-num_blue_spheres,sample_size)
+
+AR=choose(num_red_spheres,sample_size)
+AG=choose(num_green_spheres,sample_size)
+AB=choose(num_blue_spheres,sample_size)
+
+total_subsize=choose(num_total_spheres,sample_size)
+
+prob_missing_theory=(NR+NG+NB-AR-AG-AB)/total_subsize
+
+prob_missing_theory
+prob_missing_simulation
 
 ```
 
