@@ -1,0 +1,227 @@
+---
+title: "Assignment5"
+author: "xiaoyi"
+date: "26/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+# 2
+```{r}
+set.seed(0)
+n<-1000
+sample_X<-data.frame(U=runif(n))%>%
+mutate(X=case_when(
+(0<=U)&(U<0.25)~1,
+(0.25<=U)&(U<0.5)~5,
+(0.5<=U)&(U<=1)~0))%>%
+pull(X)
+
+
+sample_X_015<-function(a,b,n){
+
+sample_X<-data.frame(U=runif(n))%>%
+        mutate(X=case_when(
+              (0<=U)&(U<a)~1,
+              (a<=U)&(U<a+b)~5,
+              (a+b<=U)&(U<=1)~0))%>%
+              pull(X)
+  return (sample_X)
+}
+
+
+
+sample_average<-mean(sample_X_015(1/2,1/10,10000))
+sample_var<-var(sample_X_015(1/2,1/10,10000))
+
+sample_average
+sample_var
+
+theory_expectation<-1
+theoty_var<-2
+n<-100
+alpha<-1/10
+df<-data.frame(Beta=seq(0,9/10,0.01))%>%
+  mutate(Mean=map_dbl(Beta,~mean(sample_X_015(alpha,.x,n)))) #!!!
+
+df
+
+df%>%
+ggplot(aes(x=Beta,y=Mean))+
+  geom_line()+
+  xlab("Beta")+
+  ylab("Sample_Average")
+```
+
+
+# 3
+```{r}
+
+# dnorm gives the density
+sample_range<-seq(-4,6,0.1)
+d1<-dnorm(sample_range, mean = 1, sd = 1)
+d2<-dnorm(sample_range, mean = 1, sd = sqrt(2))
+d3<-dnorm(sample_range, mean = 1, sd = sqrt(3))
+
+df_b<-data.frame(sample_range,'1'=d1,"2"=d2,"3"=d3,check.names=FALSE)
+df_b
+df_prob_density<-df_b%>%
+pivot_longer(!sample_range,names_to = "Variance",values_to = "value")
+
+
+df_prob_density%>%
+ggplot(aes(x=sample_range,y=value, color=Variance, linetype=Variance))+
+  geom_line()+
+  xlab("X")+
+  ylab("Density")
+
+# pnorm gives the distribution function
+p1<-pnorm(sample_range, mean = 1, sd = 1)
+p2<-pnorm(sample_range, mean = 1, sd = sqrt(2))
+p3<-pnorm(sample_range, mean = 1, sd = sqrt(3))
+
+df_p<-data.frame('1'=p1,"2"=p2,"3"=p3, 'index' = sample_range,check.names=FALSE)
+df_cum<-pivot_longer(data=df_p,cols=c(1,2,3),names_to = "Variance",values_to = "value")
+
+df_cum%>%
+ggplot(aes(x=index,y=value, color=Variance, linetype=Variance))+
+  geom_line()+
+  xlab("X")+
+  ylab("Cummulative")
+
+# qnorm gives the quantile function
+q1<-qnorm(sample_range, mean = 1, sd = 1)
+q2<-qnorm(sample_range, mean = 1, sd = sqrt(2))
+q3<-qnorm(sample_range, mean = 1, sd = sqrt(3))
+
+df_q<-data.frame('1'=q1,"2"=q2,"3"=q3, sample_range,check.names=FALSE)
+
+df_quan<-df_q%>%
+pivot_longer(!sample_range,cols=c(1,2,3),names_to = "Variance",values_to = "value")
+
+df_quan%>%
+ggplot(aes(x=sample_range,y=value, color=Variance, linetype=Variance))+
+  geom_line()+
+  xlab("X")+
+  ylab("Quantile")
+
+```
+# 3 Star Questions
+```{r}
+
+range<-seq(-4,6,0.1)
+n<-100
+set.seed(0)
+standardGaussianSample<-rnorm(range, mean = 0, sd = 1)
+
+mean1Var3GaussianSampleA<-sqrt(3)*standardGaussianSample+1
+
+
+
+
+set.seed(0)
+mean1Var3GaussianSampleB<-rnorm(range,mean = 1, sd = sqrt(3))
+
+
+all.equal(mean1Var3GaussianSampleA,mean1Var3GaussianSampleB)
+
+population_density<-dnorm(range, mean = 1,sd = sqrt(3))
+
+
+population_mean=1
+sample_mean=mean(mean1Var3GaussianSampleA)
+
+
+population_mean
+sample_mean
+
+
+df<-data.frame(range,mean1Var3GaussianSampleA,population_density)
+
+
+df%>%
+ggplot(aes(x=mean1Var3GaussianSampleA))+
+  geom_density(color="blue",linetype="dashed")+
+  geom_vline(xintercept = sample_mean,color="red",linetype="dashed")+
+  geom_line(aes(x=range,y=population_density,color="red"))+
+  geom_vline(xintercept = population_mean,color="green")
+
+#????legend
+
+  
+```
+
+# 4
+```{r}
+x<-seq(0,50)
+n<-50
+p<-7/10
+binom_df<-data.frame(x,pmf=dbinom(x,size=n,prob = p))
+binom_df%>%head(3)
+
+
+x<-seq(0,50,0.01)
+u<-50*0.7
+sigma<-sqrt(50*0.7*(1-0.7))
+
+# not rnorm? 
+gaussian_df<-data.frame(x,pdf=dnorm(x,mean=u,sd=sigma))
+gaussian_df%>%head(3)
+
+
+
+
+colors<-c("Gaussian pdf"="red", "Binomial pmf"="blue")
+fill<-c("Gaussian pdf"="white", "Binomial pmf"="white")
+ggplot()+labs(x="x",y="Probability")+
+  theme_bw()+ 
+  geom_line(data=gaussian_df, aes(x,y=pdf,color="Gaussian pdf"),size=2)+
+# create plot of Gaussian density 
+geom_col(data=binom_df,
+                  aes(x=x,y=pmf,color="Binomial pmf",fill="Binomial pmf"))+
+  scale_color_manual(name = "", values=colors)+
+  scale_fill_manual(name = "", values=fill)+
+  xlim(c(20,50))
+```
+
+# 5
+```{r}
+library(SciViews)
+my_cdf_exp<-function(x,lambda){
+ if(x<0)
+   return (0)
+  else
+  return(1-exp(-lambda*x))
+}
+lambda<-1/2
+map_dbl(.x=seq(-1,4),.f=~my_cdf_exp(x=.x,lambda=lambda))
+
+
+test_inputs<-seq(-1,10,0.1)
+my_cdf_output<-map_dbl(.x=test_inputs,.f=~my_cdf_exp(x=.x,lambda=lambda))
+inbuilt_cdf_output<-map_dbl(.x=test_inputs,.f=~pexp(q=.x,rate=lambda))
+all.equal(my_cdf_output,inbuilt_cdf_output)
+
+my_quantile_exp<-function(p,lambda){
+  if(p<0)
+    return(0)
+  else 
+    return(-ln(1-p)/lambda)
+}
+
+lambda<-1/2
+map_dbl(.x=seq(0.01,0.99,0.01),.f=~my_quantile_exp(p=.x,lambda=lambda))
+
+map_dbl(.x=seq(0.01,0.99,0.01),.f=~qexp(p=.x,rate=lambda))
+all.equal(my_cdf_output,inbuilt_cdf_output)
+
+
+```
+
+```{r}
+
+```
+
