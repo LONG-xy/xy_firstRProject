@@ -78,6 +78,13 @@ ggplot(aes(x=sample_range,y=value, color=Variance, linetype=Variance))+
   xlab("X")+
   ylab("Density")
 
+'x<-seq(-4,6,0.1)
+normal_densities_by_x<-data.frame(x=x,density=dnorm(x,mean=1,sd=sqrt(1)),var=1)%>%
+rbind(data.frame(x=x,density=dnorm(x,mean=1,sd=sqrt(2)),var=2))%>%
+rbind(data.frame(x=x,density=dnorm(x,mean=1,sd=sqrt(3)),var=3))'
+
+
+
 # pnorm gives the distribution function
 p1<-pnorm(sample_range, mean = 1, sd = 1)
 p2<-pnorm(sample_range, mean = 1, sd = sqrt(2))
@@ -144,6 +151,8 @@ df<-data.frame(range,mean1Var3GaussianSampleA,population_density)
 
 df%>%
 ggplot(aes(x=mean1Var3GaussianSampleA))+
+  labs(x="X",y="Density")+
+  theme_bw()+
   geom_density(color="blue",linetype="dashed")+
   geom_vline(xintercept = sample_mean,color="red",linetype="dashed")+
   geom_line(aes(x=range,y=population_density,color="red"))+
@@ -151,6 +160,7 @@ ggplot(aes(x=mean1Var3GaussianSampleA))+
 
 #????legend
 
+                     
   
 ```
 

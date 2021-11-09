@@ -1,0 +1,182 @@
+---
+title: "Assignment6"
+author: "xiaoyi"
+date: "06/11/2021"
+output: html_document
+---
+
+# 1
+```{r}
+library(tidyverse)
+library(Stat2Data)
+data("Hawks")
+
+#head(Hawks)
+
+RedTailedDf<-data.frame(Hawks%>%
+  filter(Species=="RT")%>%
+  select("Weight","Tail","Wing"))
+
+RedTailedDf%>%
+head(5)
+
+tail_data<-RedTailedDf%>%pull(Tail)
+tail_size<-length(tail_data)
+mu_mle<-mean(tail_data,na.rm=1)
+sigma_mle<-sd(tail_data,na.rm=1)*sqrt((tail_size-1)/tail_size)
+
+tails<-seq(mu_mle-3*sigma_mle,mu_mle+3*sigma_mle,sigma*0.01)
+colors<-c("MLE density"="red","Kernel_density"="blue")
+ggplot()+
+  geom_line(data=data.frame(Tails=tails,Density=dnorm(tails,mean=mu_mle,sd=sigma_mle)),aes(x=Tails,y=Density,color="MLE density"))+
+  geom_density(data=RedTailedDf,aes(x=Tail,color="Kernel_density"))+
+  labs(x="tail",y="Tail length (mm)",color="Estimator")+
+  theme_bw()+
+  scale_color_manual(values=colors)
+
+```
+# 2
+```{r}
+
+set.seed(0)
+num_trials_per_sample_size<-100
+#???
+min_sample_size<-30
+max_sample_size<-500
+sample_size_inc<-5
+mu_0<-1
+sigma_0<-3
+simulation_df<-crossing(trial=seq(num_trials_per_sample_size),
+                sample_size=seq(min_sample_size,
+                                max_sample_size,sample_size_inc))%>%
+# create data frame of all pairs of sample_size and trial
+mutate(simulation=pmap(.l=list(trial,sample_size),
+                      .f=~rnorm(.y,mean=mu_0,sd=sigma_0)))%>%
+# simulate sequences of Gaussian random variables
+mutate(sample_md=map_dbl(.x=simulation,.f=median))%>%
+# compute the sample medians
+  group_by(sample_size)%>%
+  summarise(msq_error_md=mean((sample_md-mu_0)^2))
+
+
+simulation2_df<-crossing(trial=seq(num_trials_per_sample_size),
+                sample_size=seq(min_sample_size,
+                                max_sample_size,sample_size_inc))%>%
+# create data frame of all pairs of sample_size and trial
+mutate(simulation=pmap(.l=list(trial,sample_size),
+                      .f=~rnorm(.y,mean=mu_0,sd=sigma_0)))%>%
+
+mutate(sample_mean=map_dbl(.x=simulation,.f=mean))%>%
+  group_by(sample_size)%>%
+  summarise(msq_error_mean=mean((sample_mean-mu_0)^2))
+
+simulation_df
+simulation2_df
+
+simulation_total_df<-cbind(simulation_df,msq_error_mean=simulation2_df$msq_error_mean)
+simulation_total_df%>%head(5)
+
+
+colors<-c("Median"="blue","Mean"="red")
+linetypes<-c("Median"="dashed","Mean"="solid")
+simulation_total_df%>%
+ggplot()+
+  geom_smooth(aes(x=sample_size,y=msq_error_mean,color="Mean",linetype="Mean"))+
+  geom_smooth(aes(x=sample_size,y=msq_error_md,color="Median",linetype="Median"))+
+  theme_bw()+
+  scale_color_manual(name="Estimator",values=colors)+
+  scale_linetype_manual(name="Estimator",values=linetypes)
+
+```
+
+# 3
+```{r}
+set.seed(0)
+num_trials<-1000
+sample_size<-1000
+mu<-1
+sigma_sqr<-3
+
+simulation_df<-data.frame(trail=seq(num_trials))%>%
+  mutate(simulation=map(.x=trail,.f=~rnorm(sample_size,mean=mu,sd=sqrt(sigma_sqr))))%>%
+  mutate(sample_Var_U=map_dbl(.x=simulation,.f=var))%>%
+  mutate(sample_Var_MLE=map_dbl(.x=simulation,.f=~var(.x)*(sample_size-1)/sample_size))
+
+simulation_df
+compare_bias<-data.frame(U_bias=mean(simulation_df$sample_Var_U)-sigma_sqr,
+                        MLE_bias=mean(simulation_df$sample_Var_MLE)-sigma_sqr)
+
+compare_bias  
+
+```
+# 5
+```{r}
+set.seed(0)
+num_trials_per_sample_size<-100
+min_sample_size<-50
+max_sample_size<-1000
+sample_size_inc<-5
+
+lambda<-0.5
+simulation_df<-crossing(trial=seq(num_trials_per_sample_size),
+sample_size=seq(min_sample_size,
+max_sample_size,sample_size_inc))%>%
+mutate(simulation=pmap(.l=list(trial,sample_size),
+                       .f=~rpois(sample_size,0.5)))%>%
+group_by(sample_size)%>%
+  summarise(msq_error_lambda=mean((mean(unlist(simulation))-lambda)^2))
+
+simulation_df%>%head(5)
+
+simulation_df%>%
+ggplot(aes(x=sample_size,y=msq_error_lambda))+
+  geom_smooth()
+```
+
+## 5.2
+```{r}
+VB<-read.csv("~/Downloads/VonBortkiewicz.csv",header = TRUE)
+
+VB
+
+lambda_MLE=mean(VB$fatalities)
+lambda_MLE
+
+a<-data.frame(VB)%>%  
+  filter(fatalities==0)%>%
+#  group_by(year)%>%
+  mutate(prob=map_dbl(.x=fatalities,.f=~dpois(.x,lambda_MLE)))%>%
+  select(year,corps,prob)
+a
+
+sample_size<-1000
+simulation<-rpois(sample_size,lambda=0.5)
+```
+# 6
+```{r}
+CP<-read.csv("~/Downloads/CustomerPurchases.csv",header = TRUE)
+
+CP%>%head(5)
+
+CP<-CP%>%
+mutate(time_diffs=lead(CP$Time,1)-lead(CP$Time,0))
+
+CP
+
+lambda_MLE<-1/(mean(CP$time_diffs,na.rm=1))
+
+lambda_MLE
+
+CP<-CP%>%
+mutate(cdf=pexp(time_diffs,rate=lambda_MLE))
+
+prob<-1-pexp(60,rate=lambda_MLE)
+
+prob
+
+CP%>%
+ggplot()+
+  geom_line(aes(x=time_diffs,y=cdf))
+
+```
+
