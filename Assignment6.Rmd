@@ -92,12 +92,13 @@ ggplot()+
 # 3
 ```{r}
 set.seed(0)
-num_trials<-1000
+num_trials_per_sample_size<-100
 sample_size<-1000
 mu<-1
 sigma_sqr<-3
 
-simulation_df<-data.frame(trail=seq(num_trials))%>%
+simulation_df<-data.frame(
+  crossing(trail=seq(num_trials_per_sample_size),to=seq(to=sqrt(sample_size),by=0.1)**2))%>%
   mutate(simulation=map(.x=trail,.f=~rnorm(sample_size,mean=mu,sd=sqrt(sigma_sqr))))%>%
   mutate(sample_Var_U=map_dbl(.x=simulation,.f=var))%>%
   mutate(sample_Var_MLE=map_dbl(.x=simulation,.f=~var(.x)*(sample_size-1)/sample_size))
@@ -132,20 +133,21 @@ ggplot(aes(x=sample_size,y=msq_error_lambda))+
 ```{r}
 VB<-read.csv("~/Downloads/VonBortkiewicz.csv",header = TRUE)
 
-VB
+VB1<-VB%>%
+  group_by(corps)%>%
+  mutate(lambda_MLE=mean(fatalities))
 
-lambda_MLE=mean(VB$fatalities)
-lambda_MLE
+VB1
 
-a<-data.frame(VB)%>%  
+a<-VB1%>%  
   filter(fatalities==0)%>%
-#  group_by(year)%>%
-  mutate(prob=map_dbl(.x=fatalities,.f=~dpois(.x,lambda_MLE)))%>%
+  mutate(prob=dpois(fatalities,lambda_MLE))%>%
   select(year,corps,prob)
 a
 
-sample_size<-1000
-simulation<-rpois(sample_size,lambda=0.5)
+
+
+
 ```
 # 6
 ```{r}
