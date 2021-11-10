@@ -112,25 +112,20 @@ compare_bias
 # 5
 ```{r}
 set.seed(0)
-num_trials_per_sample_size<-100
-min_sample_size<-50
-max_sample_size<-1000
-sample_size_inc<-5
+num_trials_per_sample_size<-10
+max_sample_size<-10000
 
 lambda<-0.5
 simulation_df<-crossing(trial=seq(num_trials_per_sample_size),
-sample_size=seq(min_sample_size,
-max_sample_size,sample_size_inc))%>%
-mutate(simulation=pmap(.l=list(trial,sample_size),
-                       .f=~rpois(sample_size,0.5)))%>%
-group_by(sample_size)%>%
-  summarise(msq_error_lambda=mean((mean(unlist(simulation))-lambda)^2))
+                        sample_size=seq(to=sqrt(max_sample_size),by=0.1)**2)%>%
+  mutate(simulation=pmap(.l=list(trial,sample_size),.f=~rpois(.y,0.5)))%>%
+  group_by(sample_size)%>%
+  summarise(msq_error_lambda=map_dbl(.x=simulation,.f=~mean((mean(unlist(.x))-lambda)^2)))
 
-simulation_df%>%head(5)
 
 simulation_df%>%
 ggplot(aes(x=sample_size,y=msq_error_lambda))+
-  geom_smooth()
+  geom_point()
 ```
 
 ## 5.2
