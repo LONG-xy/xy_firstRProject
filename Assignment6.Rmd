@@ -144,9 +144,24 @@ a<-VB1%>%
   mutate(prob=dpois(fatalities,lambda_MLE))%>%
   select(year,corps,prob)
 a
+trail<-seq(10000)
+sample_size<-1000
+lambda0<-0.5
 
+simulation_df<-data.frame(Trail=trail)%>%
+  mutate(simulation=map(.x=Trail,.f=~rpois(sample_size,lambda0)))
 
+simulation_df
 
+simulation_df<-simulation_df%>%
+  mutate(fish=map_dbl(.x=simulation,
+                      .f=~sample_size*sqrt(mean(.x)/lambda0^2)*(mean(.x)-lambda0)))
+
+simulation_df
+
+simulation_df%>%
+  ggplot()+
+  geom_density(aes(x=simulation_df$fish))
 
 ```
 # 6
